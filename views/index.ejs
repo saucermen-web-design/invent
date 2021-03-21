@@ -1,0 +1,25 @@
+<%- include('../views/partials/header') %>
+
+  <h1>Fruits index page</h1>
+  <ul>
+    <% for(let i = 0; i < fruits.length; i++){ %>
+    <li>
+      The <a href="/fruits/<%=fruits[i].id; %>">
+        <%=fruits[i].name; %>
+      </a> is <%=fruits[i].color; %>.
+      <% if(fruits[i].readyToEat === true){ %>
+      It is ready to eat
+      <% } else { %>
+      It is not ready to eat
+      <% } %>
+      <!-- ADD DELETE FORM HERE -->
+      <form action="/fruits/<%=fruits[i].id%>?_method=DELETE" method="POST">
+        <input type="submit" value="DELETE" />
+      </form>
+      <!-- fruits/5e5a93cd12675b4c0efcb17e/edit -->
+      <a href="/fruits/<%=fruits[i].id%>/edit">Edit</a>
+    </li>
+    <% } %>
+  </ul>
+
+<%- include('../views/partials/footer') %>

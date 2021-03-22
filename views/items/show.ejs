@@ -1,0 +1,11 @@
+<%- include('../../views/partials/header') %>
+
+  <h1>Items show page</h1>
+  The <%=item.name; %> is <%=item.type; %>.
+  <% if(item.forSale === true){ %>
+  It is for sale
+  <% } else { %>
+  It is not for sale
+  <% } %>
+
+<%- include('../../views/partials/footer') %>

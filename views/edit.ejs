@@ -1,13 +1,13 @@
 <%- include('../views/partials/header') %>
 
-        <h1>Edit Fruit Page</h1>
-        <form action="/fruits/<%=fruit.id%>?_method=PUT" method="POST">
+        <h1>Edit Item Page</h1>
+        <form action="/items/<%=item.id%>?_method=PUT" method="POST">
     		<!--  NOTE: the form is pre-populated with values for the server-->
-    		Name: <input type="text" name="name" value="<%=fruit.name%>"/><br/>
-    		Color: <input type="text" name="color" value="<%=fruit.color%>"/><br/>
-    		Is Ready To Eat:
-            <input type="checkbox" name="readyToEat"
-                <% if(fruit.readyToEat === true){ %>
+    		Name: <input type="text" name="name" value="<%=item.name%>"/><br/>
+    		Type: <input type="text" name="type" value="<%=item.type%>"/><br/>
+    		Is for sale? :
+            <input type="checkbox" name="forSale"
+                <% if(item.forSale === true){ %>
                     checked
                 <% } %>
             />

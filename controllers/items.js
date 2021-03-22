@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Fruit = require("../models/fruits.js");
+const Item = require("../models/item");
 
 // Routes:
 
@@ -11,59 +11,59 @@ router.get("/new", (req, res) => {
 
 // CREATE
 router.post("/", (req, res) => {
-  if (req.body.readyToEat === "on") {
-    //if checked, req.body.readyToEat is set to 'on'
-    req.body.readyToEat = true;
+  if (req.body.forSale === "on") {
+    //if checked, req.body.forSale is set to 'on'
+    req.body.forSale = true;
   } else {
-    //if not checked, req.body.readyToEat is undefined
-    req.body.readyToEat = false;
+    //if not checked, req.body.forSale is undefined
+    req.body.forSale = false;
   }
-  Fruit.create(req.body, (error, result) => {
+  Item.create(req.body, (error, result) => {
     // res.send(result);
-    res.redirect("/fruits");
+    res.redirect("/items");
   });
 });
 
 // INDEX..aka SHOW ALL
 router.get("/", (req, res) => {
-  Fruit.find({}, (error, fruits) => {
-    // res.send(fruits);
-    res.render("index.ejs", { fruits });
+  Item.find({}, (error, items) => {
+    // res.send(items);
+    res.render("index.ejs", { items });
   });
 });
 
 // SECRET SEED ROUTE
 router.get("/seed", (req, res) => {
-  Fruit.create(
+  Item.create(
     [
       {
-        name: "grapefruit",
+        name: "grapeItem",
         color: "pink",
-        readyToEat: true
+        forSale: true
       },
       {
         name: "grape",
         color: "purple",
-        readyToEat: false
+        forSale: false
       },
       {
         name: "avocado",
         color: "green",
-        readyToEat: true
+        forSale: true
       }
     ],
     (error, data) => {
       console.log(data);
-      res.redirect("/fruits");
+      res.redirect("/items");
     }
   );
 });
 
 // SHOW ONE
 router.get("/:id", (req, res) => {
-  Fruit.findById(req.params.id, (err, foundFruit) => {
-    res.render("show.ejs", {
-      fruit: foundFruit
+  Item.findById(req.params.id, (err, foundItem) => {
+    res.render("./items/show", {
+      item: foundItem
     });
   });
 });
@@ -71,31 +71,31 @@ router.get("/:id", (req, res) => {
 // DELETE
 router.delete("/:id", (req, res) => {
   // res.send('deleting...')
-  Fruit.findByIdAndRemove(req.params.id, (err, data) => {
-    res.redirect("/fruits");
+  Item.findByIdAndRemove(req.params.id, (err, data) => {
+    res.redirect("/items");
   });
 });
 
 // EDIT
-// /fruits/5e5a93cd12675b4c0efcb17e/edit
+// /items/5e5a93cd12675b4c0efcb17e/edit
 router.get("/:id/edit", (req, res) => {
-  Fruit.findById(req.params.id, (err, foundFruit) => {
-    console.log("foundFruit", foundFruit);
+  Item.findById(req.params.id, (err, foundItem) => {
+    console.log("foundItem", foundItem);
     res.render("edit.ejs", {
-      fruit: foundFruit
+      item: foundItem
     });
   });
 });
 
 // PUT/UPDATE
 router.put("/:id", (req, res) => {
-  if (req.body.readyToEat === "on") {
-    req.body.readyToEat = true;
+  if (req.body.forSale === "on") {
+    req.body.forSale = true;
   } else {
-    req.body.readyToEat = false;
+    req.body.forSale = false;
   }
   // res.send(req.body)
-  Fruit.findByIdAndUpdate(
+  Item.findByIdAndUpdate(
     req.params.id,
     req.body,
     { new: true },
@@ -103,7 +103,7 @@ router.put("/:id", (req, res) => {
       if (err) {
       } else {
         // res.send(updateModel);
-        res.redirect("/fruits");
+        res.redirect("/items");
       }
     }
   );

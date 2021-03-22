@@ -1,11 +1,11 @@
+// REQUIRED MODULES  
   require('dotenv').config()
-
   const express = require("express");
   const app = express();
   const methodOverride = require("method-override");
-
-  const PORT = process.env.PORT || 3000
-  const MONGODB_URI = process.env.MONGODB_URI
+// PROCCESS .ENV FILE
+  const PORT = process.env.PORT || 3000;
+  const MONGODB_URI = process.env.MONGODB_URI;
 
 // Load up mongoose npm as mongoose:
   const mongoose = require("mongoose");
@@ -17,6 +17,7 @@
     console.log("my own middleware");
     next();
   });
+  app.set('view engine', 'ejs');
 
 // Connect mongoose to mongo db:
   mongoose.connect(MONGODB_URI, {
@@ -27,18 +28,19 @@
     console.log("connected to mongo");
   });
 
-  const fruitsController = require("./controllers/fruits.js");
-// any routes that come in for fruits should be sent
+  const itemsController = require("./controllers/items.js");
+// any routes that come in for items should be sent
 // to the fruitsContoller
-  app.use("/fruits", fruitsController);
+  app.use("/items", itemsController);
+
 
   app.get("/", (req, res) => {
-    res.redirect("/fruits");
+    res.redirect("/items");
   });
 
 // wildcard route
   app.get("*", (req, res) => {
-    res.redirect("/fruits");
+    res.redirect("/items");
   });
 
 // Web server:

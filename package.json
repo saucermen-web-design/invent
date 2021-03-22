@@ -1,14 +1,14 @@
 {
-  "name": "fruits_with_mongo",
+  "name": "inVent",
   "version": "1.0.0",
-  "description": "",
+  "description": "inVent empowers small private sellers by helping them manage their inventory like the pros.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "dev": "nodemon server.js"
   },
-  "author": "",
+  "author": "Coty McKinney",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^8.2.0",

@@ -35,7 +35,7 @@ router.get("/", (req, res) => {
 // SHOW ONE
 router.get("/:id", (req, res) => {
   Item.findById(req.params.id, (err, foundItem) => {
-    res.render("./items/show", {
+    res.render("items/show", {
       item: foundItem
     });
   });
@@ -43,9 +43,9 @@ router.get("/:id", (req, res) => {
 
 // DELETE
 router.delete("/:id", (req, res) => {
-  // res.send('deleting...')
+  console.log(`${req.params.id} is deleted...`);
   Item.findByIdAndRemove(req.params.id, (err, data) => {
-    res.redirect("/items/index");
+    res.redirect("items/index");
   });
 });
 

@@ -10,3 +10,19 @@ body {
     background-color: blue;
     color: chartreuse;
 }
+
+nav img{
+	height: 15px;
+	width: 20px;
+}
+
+footer {
+	text-align: center;
+	margin-top: 90%;
+}
+
+nav {
+	display: flex;
+	justify-content: center;
+	justify-content: space-between;
+}

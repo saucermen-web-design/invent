@@ -25,7 +25,9 @@
           <td><%= i.forSale %> </td>
           <td><%= i.listing %> </td>
           <td>
-            <a href="/items/<%= i._id %>/edit">Edit</a>
+            <a href="/items/<%= i._id %>">
+              DETAILS
+            </a>
           </td>
           <td>
             <form action="/items/<%= i._id %>?_method=DELETE" method="POST">

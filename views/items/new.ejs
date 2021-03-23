@@ -2,10 +2,16 @@
 
   <h1>New Item page</h1>
   <form action="/items" method="POST">
-    Name: <input type="text" name="name" /><br />
-    Type: <input type="text" name="type" /><br />
-    For Sale? : <input type="checkbox" name="forSale" /><br />
-    <input type="submit" name="" value="Create Item" />
+    Name: <input type="text" name="name"%>"/><br/>
+    Type: <input type="text" name="type"%>"/><br/>
+    Desc.: <input type="text" name="description"%>"/><br/>
+    Count: <input type="number" name="count"%>"/><br/>
+    Listing: <input type="text" name="listing"%>"/><br/>
+    Is for sale? :
+      <input 
+        type="checkbox" 
+        name="forSale"
+      /><br/>
+    <input type="submit" name="" value="Submit Changes"/>
   </form>
-
 <%- include('../../views/partials/footer') %>

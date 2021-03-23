@@ -1,0 +1,22 @@
+<%- include('../../views/partials/header') %>
+
+        <h1>Edit Item Page</h1>
+        <form action="/items/<%=item.id%>?_method=PUT" method="POST">
+    		<!--  NOTE: the form is pre-populated with values for the server-->
+    		Name: <input type="text" name="name" value="<%=item.name%>"/><br/>
+    		Type: <input type="text" name="type" value="<%=item.type%>"/><br/>
+            Desc.: <input type="text" name="description" value="<%= item.description %>"/><br/>
+            Count: <input type="number" name="count" value="<%= item.count %>"/><br/>
+            Listing: <input type="text" name="listing" value="<%= item.listing %>"/><br/>
+    		Is for sale? :
+            <input 
+                type="checkbox" 
+                name="forSale"
+                    <% if(item.forSale === true){ %>
+                        checked
+                    <% } %>
+            /><br/>
+            <input type="submit" name="" value="Submit Changes"/>
+        </form>
+
+<%- include('../../views/partials/footer') %>

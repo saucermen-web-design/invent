@@ -6,7 +6,7 @@ const Item = require("../models/item");
 
 // NEW
 router.get("/new", (req, res) => {
-  res.render("new.ejs");
+  res.render("items/new");
 });
 
 // CREATE
@@ -28,35 +28,8 @@ router.post("/", (req, res) => {
 router.get("/", (req, res) => {
   Item.find({}, (error, items) => {
     // res.send(items);
-    res.render("index.ejs", { items });
+    res.render("items/index", { items });
   });
-});
-
-// SECRET SEED ROUTE
-router.get("/seed", (req, res) => {
-  Item.create(
-    [
-      {
-        name: "grapeItem",
-        color: "pink",
-        forSale: true
-      },
-      {
-        name: "grape",
-        color: "purple",
-        forSale: false
-      },
-      {
-        name: "avocado",
-        color: "green",
-        forSale: true
-      }
-    ],
-    (error, data) => {
-      console.log(data);
-      res.redirect("/items");
-    }
-  );
 });
 
 // SHOW ONE
@@ -72,7 +45,7 @@ router.get("/:id", (req, res) => {
 router.delete("/:id", (req, res) => {
   // res.send('deleting...')
   Item.findByIdAndRemove(req.params.id, (err, data) => {
-    res.redirect("/items");
+    res.redirect("/items/index");
   });
 });
 
@@ -81,7 +54,7 @@ router.delete("/:id", (req, res) => {
 router.get("/:id/edit", (req, res) => {
   Item.findById(req.params.id, (err, foundItem) => {
     console.log("foundItem", foundItem);
-    res.render("edit.ejs", {
+    res.render("items/edit", {
       item: foundItem
     });
   });

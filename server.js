@@ -7,22 +7,23 @@
   const session = require('express-session');
 
   // PROCCESS .ENV FILE
-  const PORT = process.env.PORT || 3000;
+  const PORT = process.env.PORT || 3001;
   const MONGODB_URI = process.env.MONGODB_URI;
 
-// Load up mongoose npm as mongoose:
+// Load up mongoose
   const mongoose = require("mongoose");
-// allows server to review json data
   app.use(express.urlencoded({ extended: true }));
 
   app.use(methodOverride("_method"));
   app.use(express.static('public'));
   app.use(morgan('dev'));
-// your own custom middleware
+
+// Middleware
   app.use((req, res, next) => {
     console.log("my own middleware");
     next();
   });
+
 
   app.use(function(req, res, next) {
     req.date = new Date().toLocaleDateString();
@@ -48,6 +49,7 @@
 // CONTROLLERS
   const itemsController = require("./controllers/items");
   app.use("/items", itemsController);
+
   const usersController = require("./controllers/users");
   app.use("/users", usersController);
 
@@ -64,7 +66,15 @@
       res.redirect("/items");
   });
 
-
+// HOW MANY TIMES VISITIED
+  app.get('/times-visited', function(req, res) {
+    if(req.session.visits) {
+        req.session.visits++;
+    } else {
+        req.session.visits = 1;
+    };
+    res.send(`<h1>You've visited this page ${req.session.visits} time(s) </h1>`);
+});
 
 // Web server:
   app.listen(PORT, () => {

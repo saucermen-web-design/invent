@@ -50,7 +50,6 @@ router.delete("/:id", (req, res) => {
 });
 
 // EDIT
-// /items/5e5a93cd12675b4c0efcb17e/edit
 router.get("/:id/edit", (req, res) => {
   Item.findById(req.params.id, (err, foundItem) => {
     console.log("foundItem", foundItem);

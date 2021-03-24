@@ -1,5 +1,6 @@
 // REQUIRED MODULES
 const mongoose = require('mongoose');
+const { urlencoded, Router } = require("express");
     
 // DEFINIE SCHEMA
     const Schema = mongoose.Schema;
@@ -12,4 +13,6 @@ const mongoose = require('mongoose');
     });
 
 // EXPORTS
-    module.exports = mongoose.model('User', userSchema);
+    const User = mongoose.model("User", userSchema);
+
+    module.exports = User;

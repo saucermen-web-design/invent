@@ -3,14 +3,14 @@
     const router = express.Router();
     const User = require('../models/user');
     const bcrypt = require('bcrypt');
-    const SALT_ROUNDS = 10;  //  SETS AMOUNT OF PASSES THROUGH SALTING ALGORITHM
+    const SALT_ROUNDS = 12;  //  SETS AMOUNT OF PASSES THROUGH SALTING ALGORITHM
 
 // DEFINE ROUTES
     router.get("/new", (req, res) => {
         res.render("users/new");
     });
 
-    router.post("/users", (req, res) => {
+    router.post("/signup", (req, res) => {
         req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(SALT_ROUNDS));  // FETCHES ENTERED PASSWORD FROM REQ.BODY AND PROCESSES THROUGH HASHING AND SALTING ALGORITHMS
         User.create(req.body, function(error, newUser) { // ADDS NEW USER TO DB
             console.log(newUser);
@@ -33,9 +33,9 @@
                 if (doesPasswordMatch) {
                     req.session.userId = foundUser._id; // CREATES USER SESSION
                     console.log(req.session) // we can also log out the session to see the results
-                    res.redirect('users/dashboard');
+                    res.redirect('/users/dashboard');
                 } else {
-                    res.redirect('users/signin');  // REDIRECTS THEM TO SIGNIN IF THEIR PASSWORD DOES NOT MATCH
+                    res.redirect('/users/signin');  // REDIRECTS THEM TO SIGNIN IF THEIR PASSWORD DOES NOT MATCH
                 }
             }
         });

@@ -58,12 +58,12 @@
 
 // ROUTING
   app.get("/", (req, res) => {
-    res.redirect("/items");
+    res.redirect("users/login");
   });
 
 // wildcard route
   app.get("*", (req, res) => {
-      res.redirect("/items");
+      res.redirect("/");
   });
 
 // HOW MANY TIMES VISITIED

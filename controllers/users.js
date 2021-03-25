@@ -33,7 +33,7 @@
                 if (doesPasswordMatch) {
                     req.session.userId = foundUser._id; // CREATES USER SESSION
                     console.log(req.session) // we can also log out the session to see the results
-                    res.redirect('/users/dashboard');
+                    res.redirect('/items');
                 } else {
                     res.redirect('/users/signin');  // REDIRECTS THEM TO SIGNIN IF THEIR PASSWORD DOES NOT MATCH
                 }
@@ -41,14 +41,14 @@
         });
     });
 
-// DEFINE PROTECTED ROUTES
-    router.get('/dashboard', (req, res) => { 
-        if(req.session.userId) {
-            res.render('users/dashboard');
-        } else {
-            res.redirect('/users/signin');
-        };
-    });
+// // DEFINE PROTECTED ROUTES
+//     router.get('/dashboard', (req, res) => { 
+//         if(req.session.userId) {
+//             res.render('items/index');
+//         } else {
+//             res.redirect('/users/signin');
+//         };
+//     });
 
     router.get('/users/logout', (req, res) => {
         req.session.destroy();

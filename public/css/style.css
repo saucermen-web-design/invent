@@ -1,3 +1,12 @@
+/* VARIABLES */
+:root {
+	--bright-orange: #F18963;
+	--light-orange: #f5ac91;
+	--bright-green: #A0BE73;
+	--light-green: #c6d8ab;
+	--purple: #B67D9A;
+}
+
 *,
 *::before,
 *::after {
@@ -7,22 +16,70 @@
 }
 
 body {
-    background-color: blue;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+    background-image: linear-gradient( #4B001D, #660001);
     color: chartreuse;
-}
 
-nav img{
-	height: 15px;
-	width: 20px;
 }
 
 footer {
-	text-align: center;
-	margin-top: 90%;
+	display: grid;
+	justify-content: center;
+	background-color: green;
+	bottom: 0;
+	position: fixed;
+	width: 100%;
 }
 
-nav {
+.navigation {
+	height: 97vh; /* 100% Full-height */
+	position: sticky; /* Stay in place */
+	z-index: 1; /* Stay on top */
+	top: 0; /* Stay at the top */
+	left: 0;
+	background-color: #111; /* Black*/
+	width: 33%;
+	display: flex;
+}
+
+nav a {
+	padding: 8px 8px 8px 32px;
+	text-decoration: none;
+	font-size: 25px;
+	color: #818181;
+	display: flex;
+	transition: 0.3s; 
+	justify-content: center; 
+	position: sticky;
+}
+
+nav a:hover {
+	color: #f1f1f1;
+}
+
+.itemDisp {
+	position: fixed;
 	display: flex;
 	justify-content: center;
-	justify-content: space-between;
+	background: -webkit-linear-gradient(360deg, #1C1C1C 10%, #494949 360%); 
+	background: -moz-linear-gradient(360deg, #1C1C1C 10%, #494949 360%); 
+	background: linear-gradient(360deg, #1C1C1C 10%, #494949 360%);
+	background-position: bottom;
+	height: 97vh;
 }
+
+.itemTable {
+	border: #A0BE73 solid;
+}
+
+.titleBar {
+	display: grid;
+	position: relative;
+	top: 0;
+}
+
+@media screen and (max-height: 450px) {
+	nav {padding-top: 15px;}
+	nav a {font-size: 18px;}
+  }

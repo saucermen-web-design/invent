@@ -25,7 +25,6 @@
 	
 	body {
 		display: grid;
-		display: flex;
 		grid-template-columns: repeat(2, 1fr);
     	background: var(--black-grey-gradient-chrome); 
 		background: var(--black-grey-gradient-moz); 
@@ -54,16 +53,17 @@
 		width: 100vw;
 		color: var(--deep-purple);
 		align-content: center;
+		height: 4vh;
 	}
 
 	.navigation {
-		height: 94.4vh;
+		height: 100vh;
 		position: sticky;
 		z-index: 1; /* Stay on top */
 		top: 0; /* Stay at the top */
 		left: 0;
 		background-color: #390FAC;
-		width: 15vw;
+		width: 10vw;
 		display: flex;
 		flex-wrap: wrap;
 		text-align: center;
@@ -86,26 +86,71 @@
 		color: #f1f1f1;
 	}
 
+	.mainContainer {
+		position: fixed;
+		display: flex;
+		flex-flow: column;
+		background: var(--black-grey-gradient-chrome); 
+		background: var(--black-grey-gradient-moz); 
+		background: var(--black-grey-gradient);
+		background-repeat: round;
+	}
+
 /* ITEMS INDEX */
 
 	thead {
 		background-color: silver;
+		display: flex;
+		flex-wrap: wrap;
+		justify-self: center;
 	}
 
 	.itemDisp {
-		margin: 40%;
 		position: relative;
 		display: flex;
 		flex-wrap: wrap;
-		flex-direction: column;
+		justify-content: center;
+		background-image: var(--black-grey-gradient);
+		background-image: var(--black-grey-gradient-chrome);
+		background-image: var(--black-grey-gradient-moz);
 		height: 100vh;
-		width: 100%;
-		border: green solid;
+		width: 100vw;
 	}
 
 /* ITEMS ADD */
 
+#addItemForm {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	background-image: var(--black-grey-gradient);
+	background-image: var(--black-grey-gradient-chrome);
+	background-image: var(--black-grey-gradient-moz);
+	height: 100vh;
+	width: 100vw;
+	overflow: auto;
+}
+
 /* ITEMS SHOW */
+
+	.showList {
+		position: relative;
+		display: flex;
+		justify-content: center;
+		align-content: center;
+		background: var(--black-grey-gradient-chrome); 
+		background: var(--black-grey-gradient-moz); 
+		background: var(--black-grey-gradient);
+		background-position: center;
+		border-radius: 10px;
+		padding: 50px;
+		margin: 11px;
+		overflow: auto;
+		width: 95%;
+		height: 95%;
+		color: var(--light-orange);
+		list-style: none;
+	}
 
 
 /* USER REGISTRATION VIEW */
@@ -114,7 +159,7 @@
 	.regContainer {
 		width: 90vw;
 		height: 80vh;
-		margin: 50px auto;
+		margin: 20px auto;
 		display: flex;
 		border-radius: 10px;
 		box-shadow: 1px 1px 10px silver,
@@ -122,7 +167,7 @@
 					1px -1px 10px silver,
 					-1px 1px 10px silver;
 		display: flex;
-		background: var(--dark-orange);
+		background: var(--deep-purple);
 		justify-content: center;
 	  }
 	

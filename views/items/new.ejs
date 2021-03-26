@@ -1,18 +1,23 @@
 <%- include('../../views/partials/header') %>
 <%- include('../../views/partials/nav') %>
-
-  <h1>New Item page</h1>
-  <form action="/items" method="POST">
-    Name: <input type="text" name="name"%>"/><br/>
-    Type: <input type="text" name="type"%>"/><br/>
-    Desc.: <input type="text" name="description"%>"/><br/>
-    Count: <input type="number" name="count"%>"/><br/>
-    Listing: <input type="text" name="listing"%>"/><br/>
-    Is for sale? :
-      <input 
-        type="checkbox" 
-        name="forSale"
-      /><br/>
-    <input type="submit" name="" value="Submit Changes"/>
-  </form>
+    <div class="mainContainer">
+      <div class="titleBar">
+        <h1>New Item page</h1>
+      </div>
+      <div id="addItemForm">
+        <form action="/items" method="POST">
+          Name: <input type="text" name="name"%>"/><br/>
+          Type: <input type="text" name="type"%>"/><br/>
+          Desc.: <input type="text" name="description"%>"/><br/>
+          Count: <input type="number" name="count"%>"/><br/>
+          Listing: <input type="text" name="listing"%>"/><br/>
+          Is for sale? :
+          <input 
+            type="checkbox" 
+            name="forSale"
+          /><br/>
+          <input type="submit" name="" value="Submit Changes"/>
+        </form>
+      </div>
+    </div>
 <%- include('../../views/partials/footer') %>

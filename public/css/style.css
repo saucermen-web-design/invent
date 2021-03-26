@@ -1,5 +1,6 @@
 /* VARIABLES */
 :root {
+	--darker-orange: #AC390F;
     --dark-orange: #EB541D;
 	--bright-orange: #F18963;
 	--light-orange: #f5ac91;
@@ -28,17 +29,20 @@
 		grid-template-columns: repeat(2, 1fr);
     	background: var(--black-grey-gradient-chrome); 
 		background: var(--black-grey-gradient-moz); 
-		background: var(--black-grey-gradient);;
-    	color: chartreuse;
+		background: var(--black-grey-gradient);
+		background-repeat: round;
+    	color: var(--dark-orange);
 	}
 	
 	.titleBar {
 		display: flex;
 		position: relative;
-		background-color: purple;
-		width: 100%;
+		justify-self: flex-end;
+		background-color: #390FAC;
+		width: 100vw;
 		height: 5vh;
 		justify-content: center;
+		align-content: center;
 	}
 
 	.bottomBar {
@@ -48,24 +52,28 @@
 		bottom: 0;
 		position: fixed;
 		width: 100vw;
+		color: var(--deep-purple);
+		align-content: center;
 	}
 
 	.navigation {
-		height: 97vh;
+		height: 94.4vh;
 		position: sticky;
 		z-index: 1; /* Stay on top */
 		top: 0; /* Stay at the top */
 		left: 0;
-		background-color: var(--deep-purple);
-		width: 15%;
-		display: grid;
+		background-color: #390FAC;
+		width: 15vw;
+		display: flex;
+		flex-wrap: wrap;
+		text-align: center;
 	}
 
 	nav a {
 		padding: 8px 8px 8px 32px;
 		text-decoration: none;
 		font-size: 25px;
-		color: #818181;
+		color: var(--darker-orange);
 		display: flex;
 		transition: 1s; 
 		justify-content: center; 
@@ -85,7 +93,8 @@
 	}
 
 	.itemDisp {
-		position: fixed;
+		margin: 40%;
+		position: relative;
 		display: flex;
 		flex-wrap: wrap;
 		flex-direction: column;

@@ -8,8 +8,9 @@
  * MongoDB
  * NodeJS
  * Express
- * Morgan logging
+ * Morgan (development logging)
  * Nodemon
+ * connect-mongo (session storage)
 
 ## Dependencies
   * dotenv

@@ -7,6 +7,7 @@
   const session = require('express-session');
   const favicon = require('serve-favicon');
   const path = require('path');
+  const MongoStore = require('connect-mongo');
 
   // PROCCESS .ENV FILE
   const PORT = process.env.PORT || 3001;
@@ -39,6 +40,7 @@
         secure: true,
         maxAge:60000
            },
+    store: MongoStore.create({ mongoUrl: 'mongodb+srv://cotym:Gr4pes220@mongodbpractice.gqcbu.mongodb.net/projectWeek2?retryWrites=true&w=majority' }), 
     secret: 'supersecret',
     saveUninitialized: true,
     resave: false

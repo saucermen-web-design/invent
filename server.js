@@ -11,7 +11,7 @@ require('dotenv').config()
 
   // PROCCESS .ENV FILE
   const PORT = process.env.PORT || 3001;
-  const MONGODB_URI = toString(process.env.MONGODB_URI);
+  const MONGODB_URI = process.env.MONGODB_URI;
 
 // Load up mongoose
   const mongoose = require("mongoose");

@@ -47,7 +47,7 @@ require('dotenv').config()
     }));
 
 // Connect mongoose to mongo db:
-  mongoose.connect(MONGODB_URI, {
+  mongoose.connect(`${MONGODB_URI}`, {
     useNewUrlParser: true,
     useUnifiedTopology: true
   });

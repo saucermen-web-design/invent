@@ -40,14 +40,14 @@ require('dotenv').config()
         secure: true,
         maxAge:60000
            },
-    store: MongoStore.create({ mongoUrl: toString(MONGODB_URI) }), 
+    store: MongoStore.create({ mongoUrl: MONGODB_URI }), 
     secret: 'supersecret',
     saveUninitialized: true,
     resave: false
     }));
 
 // Connect mongoose to mongo db:
-  mongoose.connect(MONGODB_URI, {
+  mongoose.connect(toString(MONGODB_URI), {
     useNewUrlParser: true,
     useUnifiedTopology: true
   });

@@ -47,7 +47,7 @@
     }));
 
 // Connect mongoose to mongo db:
-  mongoose.connect(MONGODB_URI, {
+  mongoose.connect(toString(MONGODB_URI), {
     useNewUrlParser: true,
     useUnifiedTopology: true
   });

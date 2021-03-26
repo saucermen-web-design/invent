@@ -1,6 +1,6 @@
 // REQUIRED MODULES
 const mongoose = require('mongoose');
-const { urlencoded, Router } = require("express");
+const { urlencoded } = require("express");
     
 // DEFINIE SCHEMA
     const Schema = mongoose.Schema;

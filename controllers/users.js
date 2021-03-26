@@ -13,7 +13,7 @@
     router.post("/signup", (req, res) => {
         req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(SALT_ROUNDS));  // FETCHES ENTERED PASSWORD FROM REQ.BODY AND PROCESSES THROUGH HASHING AND SALTING ALGORITHMS
         User.create(req.body, function(error, newUser) { // ADDS NEW USER TO DB
-            console.log(newUser);
+            // console.log(newUser);
             res.redirect('/login');
         });
     });
@@ -32,7 +32,7 @@
                 const doesPasswordMatch = bcrypt.compareSync(req.body.password, foundUser.password); // COMPARES PASSWORD IN DB WITH ENTERED PASSWORD FRIN REQ.BODY
                 if (doesPasswordMatch) {
                     req.session.userId = foundUser._id; // CREATES USER SESSION
-                    console.log(req.session) // we can also log out the session to see the results
+                    // console.log(req.session) // we can also log out the session to see the results
                     res.redirect('/items');
                 } else {
                     res.redirect('/users/signin');  // REDIRECTS THEM TO SIGNIN IF THEIR PASSWORD DOES NOT MATCH

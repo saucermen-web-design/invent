@@ -1,13 +1,13 @@
 // REQUIRED MODULES  
-  require('dotenv').config()
-  const express = require("express");
-  const app = express();
-  const methodOverride = require("method-override");
-  // const morgan = require('morgan');
-  const session = require('express-session');
-  const favicon = require('serve-favicon');
-  const path = require('path');
-  const MongoStore = require('connect-mongo');
+const express = require("express");
+const app = express();
+const methodOverride = require("method-override");
+// const morgan = require('morgan');
+const session = require('express-session');
+const favicon = require('serve-favicon');
+const path = require('path');
+const MongoStore = require('connect-mongo');
+require('dotenv').config()
 
   // PROCCESS .ENV FILE
   const PORT = process.env.PORT || 3001;
@@ -23,7 +23,7 @@
 
 // Middleware
   app.use((req, res, next) => {
-    console.log("my own middleware");
+    // console.log("my own middleware");
     next();
   });
   
@@ -47,12 +47,12 @@
     }));
 
 // Connect mongoose to mongo db:
-  mongoose.connect(toString(MONGODB_URI), {
+  mongoose.connect(MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
   });
   mongoose.connection.once("open", () => {
-    console.log("connected to mongo");
+    // console.log("connected to mongo");
   });
 
 // CONTROLLERS
@@ -87,5 +87,5 @@
 
 // Web server:
   app.listen(PORT, () => {
-    console.log("listening");
+    // console.log("listening");
   });

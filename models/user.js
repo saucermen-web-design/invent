@@ -8,6 +8,7 @@ const { urlencoded, Router } = require("express");
     const userSchema = new Schema({
         username: String,
         password: String,
+        email: String,
     }, {
         timestamps: true,
     });

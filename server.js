@@ -3,7 +3,7 @@
   const express = require("express");
   const app = express();
   const methodOverride = require("method-override");
-  const morgan = require('morgan');
+  // const morgan = require('morgan');
   const session = require('express-session');
   const favicon = require('serve-favicon');
   const path = require('path');
@@ -18,7 +18,7 @@
 
   app.use(methodOverride("_method"));
   app.use(express.static('public'));
-  app.use(morgan('dev'));
+  // app.use(morgan('dev'));
 
 // Middleware
   app.use((req, res, next) => {

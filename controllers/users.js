@@ -3,7 +3,7 @@
     const router = express.Router();
     const User = require('../models/user');
     const bcrypt = require('bcrypt');
-    const SALT_ROUNDS = 12;  //  SETS AMOUNT OF PASSES THROUGH SALTING ALGORITHM
+    const SALT_ROUNDS = 10;  //  SETS AMOUNT OF PASSES THROUGH SALTING ALGORITHM
 
 // DEFINE ROUTES
     router.get("/new", (req, res) => {

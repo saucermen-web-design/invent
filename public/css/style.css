@@ -33,6 +33,16 @@
     	color: var(--dark-orange);
 	}
 	
+	.mainContainer {
+		position: fixed;
+		display: flex;
+		flex-flow: column;
+		background: var(--black-grey-gradient-chrome); 
+		background: var(--black-grey-gradient-moz); 
+		background: var(--black-grey-gradient);
+		background-repeat: round;
+	}
+
 	.titleBar {
 		display: flex;
 		position: relative;
@@ -56,17 +66,37 @@
 		height: 4vh;
 	}
 
+/* NAVIGATION */
+
 	.navigation {
+		margin-top: 10px;
 		height: 100vh;
 		position: sticky;
 		z-index: 1; /* Stay on top */
 		top: 0; /* Stay at the top */
 		left: 0;
 		background-color: #390FAC;
-		width: 10vw;
+		width: 20%;
 		display: flex;
 		flex-wrap: wrap;
-		text-align: center;
+		text-align: center;	
+	}
+
+	.navigation li {
+		border: black solid;
+	}
+
+	.navigation li:hover {
+		background-color: #7E54F0;
+	}
+
+	.navigation p {
+		font-size: 20px;
+	}
+
+	.navigation img {
+		height: 40px;
+		width: 40px;
 	}
 
 	nav a {
@@ -76,45 +106,47 @@
 		color: var(--darker-orange);
 		display: flex;
 		transition: 1s; 
-		justify-content: center; 
-		justify-self: center;
-		position: sticky;
 		flex-wrap: wrap;
 	}
+
 
 	nav a:hover {
 		color: #f1f1f1;
 	}
 
-	.mainContainer {
-		position: fixed;
-		display: flex;
-		flex-flow: column;
-		background: var(--black-grey-gradient-chrome); 
-		background: var(--black-grey-gradient-moz); 
-		background: var(--black-grey-gradient);
-		background-repeat: round;
-	}
 
 /* ITEMS INDEX */
-
-	thead {
-		background-color: silver;
-		display: flex;
-		flex-wrap: wrap;
-		justify-self: center;
-	}
 
 	.itemDisp {
 		position: relative;
 		display: flex;
 		flex-wrap: wrap;
-		justify-content: center;
+		height: 50vh;
+		width: 50vw;
+		align-self: center;
 		background-image: var(--black-grey-gradient);
 		background-image: var(--black-grey-gradient-chrome);
 		background-image: var(--black-grey-gradient-moz);
-		height: 100vh;
-		width: 100vw;
+		justify-content: center;
+	}
+
+	table {
+		border-collapse: collapse;
+		border: 2px solid rgb(100, 100, 100);
+		letter-spacing: 1px;
+		font-family: sans-serif;
+		font-size: .7rem;
+		background-color: #5A5A5A;
+	}
+	
+	td,
+	th {
+		border: 1px solid rgb(100, 100, 100);
+		padding: 10px 10px;
+	}
+	
+	td {
+		text-align: center;
 	}
 
 /* ITEMS ADD */
@@ -134,22 +166,42 @@
 /* ITEMS SHOW */
 
 	.showList {
-		position: relative;
 		display: flex;
+		flex: column wrap;
 		justify-content: center;
-		align-content: center;
 		background: var(--black-grey-gradient-chrome); 
 		background: var(--black-grey-gradient-moz); 
 		background: var(--black-grey-gradient);
 		background-position: center;
+		background-repeat: round;
 		border-radius: 10px;
 		padding: 50px;
-		margin: 11px;
+		margin: 40px;
 		overflow: auto;
-		width: 95%;
-		height: 95%;
+		width: 85vw;
+		height: 70vh;
 		color: var(--light-orange);
+		position: sticky;
+	}
+
+	.showList ul {
 		list-style: none;
+	}
+
+	.showContainer {
+		width: 88vw;
+		height: 85vh;
+		margin-top: 20px;
+		margin-left: 135px;
+		display: flex;
+		border-radius: 10px;
+		box-shadow: 1px 1px 10px silver,
+					-1px -1px 10px silver,
+					1px -1px 10px silver,
+					-1px 1px 10px silver;
+		flex: column wrap;
+		background: var(--deep-purple);
+		align-self: center;
 	}
 
 
@@ -158,15 +210,15 @@
     /* CONTAINERS */
 	.regContainer {
 		width: 90vw;
-		height: 80vh;
-		margin: 20px auto;
+		height: 90vh;
+		margin: 20px;
 		display: flex;
 		border-radius: 10px;
 		box-shadow: 1px 1px 10px silver,
 					-1px -1px 10px silver,
 					1px -1px 10px silver,
 					-1px 1px 10px silver;
-		display: flex;
+		flex-wrap: wrap;
 		background: var(--deep-purple);
 		justify-content: center;
 	  }
@@ -178,13 +230,15 @@
 		background: var(--black-grey-gradient-moz); 
 		background: var(--black-grey-gradient);
 		background-position: center;
+		background-repeat: round;
 		border-radius: 10px;
 		padding: 10px;
 		margin: 10px;
 		overflow: auto;
 		width: 95%;
-		height: 95%;
+		height: 80%;
 		color: var(--light-orange);
+		position: sticky;
 	  }
 	
 	  .registration form {
@@ -192,14 +246,17 @@
 		  flex-direction: column;
 		  justify-content: space-evenly;
 		  text-align: center;
+		  position: relative;
 	  }
 	
-	  #regHeading {
-		  position: fixed;
+	  .regHeading {
+		  position: relative;
 		  top: 0;
+		  display: flex;
 	  }
 	  
 	  #regHeading h1 {
+		display: flex;
 		font-family: fantasy;
 		font-weight: 500;
 		color: var(--bright-orange);

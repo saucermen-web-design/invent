@@ -7,7 +7,7 @@
       </div>
 
       <div class="itemDisp">
-        <table'>
+        <table>
           <thead>
             <colgroup>
               <col span='1' class='itemId'>
@@ -26,15 +26,13 @@
               <th>Item Count</th>
               <th>For sale</th>
               <th>Listing</th>
+              <th colspan='2'></th>
             </tr>
           </thead>
           <tbody>
             <% items.forEach(function(i) { %>
               <tr>
-                <th scope="row"><% function incrementItemId(n) {
-                  n=0;
-                  n++;
-                }; %> </th>
+                <th scope="row"></th>
                 <td><%= i.name %></td>
                 <td><%= i.type %></td>
                 <td><%= i.description %></td>

@@ -24,7 +24,6 @@
     next();
   });
 
-
   app.use(function(req, res, next) {
     req.date = new Date().toLocaleDateString();
     req.time = new Date().toLocaleTimeString();

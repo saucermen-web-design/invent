@@ -1,16 +1,15 @@
 <%- include('../../views/partials/header') %>
 <%- include('../../views/partials/nav') %>
-
-    <div class="mainContainer">
-      <div class="titleBar">
-        <h1><%= item.name %></h1>
-      </div>
-    <div class="regContainer">
+  <div class="mainContainer">
+    <div class='titleBar'>
+      <h1><%= item.name %></h1>
+    </div>
+    <div class="showContainer">
       <div class='showList'>
         <ul>
-          <li>Type: <%= item.type %></li>
-          <li>Description: <%= item.description %></li>
-          <li>Count: <%= item.count %></li>
+          <li><h3>Type: </h3><p><%= item.type %></p></li>
+          <li><h3>Description: </h3><p><%= item.description %></p></li>
+          <li><h3>Count: </h3><p><%= item.count %></p></li>
           <li><a href="/items/<%= item._id %>/edit">Edit</a></li>
         </ul>
       </div>

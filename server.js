@@ -35,10 +35,14 @@
   });
 
   app.use(session({
+    cookie:{
+        secure: true,
+        maxAge:60000
+           },
     secret: 'supersecret',
-    resave: false,
-    saveUninitialized: false,
-  }));
+    saveUninitialized: true,
+    resave: false
+    }));
 
 // Connect mongoose to mongo db:
   mongoose.connect(MONGODB_URI, {

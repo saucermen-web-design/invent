@@ -1,11 +1,17 @@
 <%- include('../../views/partials/header') %>
-        
-    <h1>Signup</h1>
-    <form action="/users/signup" method="POST">
-        E-mail: <input type="text" name="email" /><br />
-        Username: <input type="text" name="username" /><br />
-        Password: <input type="password" name="password" /><br />
-        <input type="submit" value="Signup" />
-    </form>
+
+    <div class="regContainer">
+        <div id="regHeading">
+            <h1>Sign-up</h1>
+        </div>
+        <div class="registration">
+            <form action="/users/signup" method="POST">
+                E-mail: <input type="text" name="email" /><br />
+                Username: <input type="text" name="username" /><br />
+                Password: <input type="password" name="password" /><br />
+                <input type="submit" value="Sign-up" />
+            </form>
+        </div>
+    </div>
 
 <%- include('../../views/partials/footer') %>

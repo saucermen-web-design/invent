@@ -40,7 +40,8 @@ require('dotenv').config()
         secure: true,
         maxAge:60000
            },
-    store: MongoStore.create({ client: MONGODB_URI }), 
+    store: MongoStore.create({ client: MONGODB_URI, clientPromise,
+      dbName: 'projectWeek2'}), 
     secret: 'supersecret',
     saveUninitialized: true,
     resave: false

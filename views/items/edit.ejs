@@ -1,12 +1,10 @@
 <%- include('../../views/partials/header') %>
-<%- include('../../views/partials/nav') %>
         
-    <div class="mainContainer">
-        <div class="titleBar">
+    <div class="regContainer">
+        <div class="regHeading">
             <h1>Edit Item Page</h1>
         </div>
-        <div class="regContainer">
-            <div class='editForm'>
+            <div class='registration editForm'>
                 <form action="/items/<%=item.id%>?_method=PUT" method="POST">
     		        Name: <input type="text" name="name" value="<%=item.name%>"/><br/>
     		        Type: <input type="text" name="type" value="<%=item.type%>"/><br/>
@@ -24,7 +22,6 @@
                     <input type="submit" name="" value="Submit Changes"/>
                 </form>
             </div>
-        </div>
     </div>
 
 <%- include('../../views/partials/footer') %>

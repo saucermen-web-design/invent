@@ -1,21 +1,21 @@
 <%- include('../../views/partials/header') %>
-<%- include('../../views/partials/nav') %>
-    <div class="mainContainer">
-      <div class="titleBar">
+    <div class="regContainer">
+      <div class="regHeading">
         <h1>New Item page</h1>
       </div>
-      <div id="addItemForm">
+      <div class="registration">
         <form action="/items" method="POST">
           Name: <input type="text" name="name"%>"/><br/>
           Type: <input type="text" name="type"%>"/><br/>
           Desc.: <input type="text" name="description"%>"/><br/>
           Count: <input type="number" name="count"%>"/><br/>
           Listing: <input type="text" name="listing"%>"/><br/>
-          Is for sale? :
-          <input 
-            type="checkbox" 
-            name="forSale"
-          /><br/>
+          <p>Is for sale? :
+            <input 
+              type="checkbox" 
+              name="forSale"
+            /><br/>
+          </p>
           <input type="submit" name="" value="Submit Changes"/>
         </form>
       </div>

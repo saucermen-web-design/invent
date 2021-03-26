@@ -74,16 +74,17 @@
 		position: sticky;
 		z-index: 1; /* Stay on top */
 		top: 0; /* Stay at the top */
-		left: 0;
+		left: 0; /* Stay left */
 		background-color: #390FAC;
 		width: 20%;
 		display: flex;
-		flex-wrap: wrap;
-		text-align: center;	
+		flex-flow: column wrap;
 	}
 
 	.navigation li {
-		border: black solid;
+		border: black inset 1px;
+		margin-top: 10px;
+		background-color: var(--dark-orange);
 	}
 
 	.navigation li:hover {
@@ -103,7 +104,7 @@
 		padding: 8px 8px 8px 32px;
 		text-decoration: none;
 		font-size: 25px;
-		color: var(--darker-orange);
+		color: #390FAC;
 		display: flex;
 		transition: 1s; 
 		flex-wrap: wrap;
@@ -114,6 +115,12 @@
 		color: #f1f1f1;
 	}
 
+	#logoutBtn {
+		display: flex;
+		margin-top: 40vh;
+		align-content: center;
+	}
+
 
 /* ITEMS INDEX */
 
@@ -121,8 +128,8 @@
 		position: relative;
 		display: flex;
 		flex-wrap: wrap;
-		height: 50vh;
-		width: 50vw;
+		height: 100vh;
+		width: 100vw;
 		align-self: center;
 		background-image: var(--black-grey-gradient);
 		background-image: var(--black-grey-gradient-chrome);
@@ -132,21 +139,41 @@
 
 	table {
 		border-collapse: collapse;
-		border: 2px solid rgb(100, 100, 100);
+		border: 4px solid #390FAC;
 		letter-spacing: 1px;
 		font-family: sans-serif;
 		font-size: .7rem;
-		background-color: #5A5A5A;
+		background-color: #676767;
+		color: #1C1C1C;
+		font-weight: bold;
+		height: 40vh;
+		width: 90vw;
+		margin-left: 120px;
 	}
 	
 	td,
 	th {
-		border: 1px solid rgb(100, 100, 100);
+		border: 1px ridge #1E1E1E;
 		padding: 10px 10px;
 	}
 	
 	td {
 		text-align: center;
+	}
+
+	tr:hover {
+		background-color: silver;
+	}
+
+	#itemDltBtn {
+		font-weight: bold;
+		font-size: 1rem;
+		background-color: red;
+	}
+
+	table a {
+		text-decoration: none;
+		color: #390FAC;
 	}
 
 /* ITEMS ADD */
@@ -199,11 +226,10 @@
 					-1px -1px 10px silver,
 					1px -1px 10px silver,
 					-1px 1px 10px silver;
-		flex: column wrap;
+		flex-flow: column wrap;
 		background: var(--deep-purple);
 		align-self: center;
 	}
-
 
 /* USER REGISTRATION VIEW */
 
@@ -221,6 +247,7 @@
 		flex-wrap: wrap;
 		background: var(--deep-purple);
 		justify-content: center;
+		margin-left: 70px;
 	  }
 	
 	  .registration {

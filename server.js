@@ -11,7 +11,7 @@ require('dotenv').config()
 
   // PROCCESS .ENV FILE
   const PORT = process.env.PORT || 3001;
-  const MONGODB_URI = process.env.MONGODB_URI;
+  const MONGODB_URI = toString(process.env.MONGODB_URI);
 
 // Load up mongoose
   const mongoose = require("mongoose");
@@ -40,7 +40,7 @@ require('dotenv').config()
         secure: true,
         maxAge:60000
            },
-    store: MongoStore.create({ mongoUrl: 'mongodb+srv://cotym:Gr4pes220@mongodbpractice.gqcbu.mongodb.net/projectWeek2?retryWrites=true&w=majority' }), 
+    store: MongoStore.create({ mongoUrl: MONGODB_URI }), 
     secret: 'supersecret',
     saveUninitialized: true,
     resave: false

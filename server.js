@@ -40,7 +40,7 @@ require('dotenv').config()
         secure: true,
         maxAge:60000
            },
-    store: MongoStore.create({ mongoUrl: MONGODB_URI }), 
+    store: MongoStore.create({ mongoUrl: 'mongodb+srv://cotym:Gr4pes220@mongodbpractice.gqcbu.mongodb.net/projectWeek2?retryWrites=true&w=majority' }), 
     secret: 'supersecret',
     saveUninitialized: true,
     resave: false

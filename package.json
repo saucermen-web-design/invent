@@ -1,6 +1,9 @@
 {
   "name": "invent",
   "version": "1.0.0",
+  "engines": {
+    "node": "^15.8.0"
+  },
   "description": "inVent empowers small private sellers by helping them manage their inventory like the pros.",
   "main": "server.js",
   "scripts": {

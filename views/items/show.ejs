@@ -10,7 +10,15 @@
           <li><h3>Type: </h3><p><%= item.type %></p></li>
           <li><h3>Description: </h3><p><%= item.description %></p></li>
           <li><h3>Count: </h3><p><%= item.count %></p></li>
-          <li><a href="/items/<%= item._id %>/edit">Edit</a></li>
+          <li><h3>For Sale?: </h3><p>
+            <% if(item.forSale === true) { %>
+              Yes
+            <% } else { %>
+              No
+            <% }; %></p>
+          </li>
+          <li><h3>Listing: </h3><p><a href='<%= item.listing %>'><%= item.listing %></a></p></li>
+          <li><a class='editBtn' href="/items/<%= item._id %>/edit">Edit</a></li>
         </ul>
       </div>
     </div>

@@ -49,7 +49,7 @@
 		justify-self: flex-end;
 		background-color: #390FAC;
 		width: 100vw;
-		height: 5vh;
+		height: 6vh;
 		justify-content: center;
 		align-content: center;
 	}
@@ -202,11 +202,11 @@
 		background-position: center;
 		background-repeat: round;
 		border-radius: 10px;
-		padding: 50px;
-		margin: 40px;
+		padding: 40px;
+		margin-left: 15px;
 		overflow: auto;
-		width: 85vw;
-		height: 70vh;
+		width: 83vw;
+		height: 81vh;
 		color: var(--light-orange);
 		position: sticky;
 	}
@@ -216,10 +216,10 @@
 	}
 
 	.showContainer {
-		width: 88vw;
+		width: 85vw;
 		height: 85vh;
 		margin-top: 20px;
-		margin-left: 135px;
+		margin-left: 120px;
 		display: flex;
 		border-radius: 10px;
 		box-shadow: 1px 1px 10px silver,
@@ -229,6 +229,17 @@
 		flex-flow: column wrap;
 		background: var(--deep-purple);
 		align-self: center;
+		justify-content: center;
+	}
+
+	.editBtn {
+		position: fixed;
+		background-color: var(--darker-orange);
+		border: var(--deep-purple) ridge;
+		padding: 10px;
+		margin: 20px;
+		margin-left: 40px;
+		color: #1C1C1C;
 	}
 
 /* USER REGISTRATION VIEW */

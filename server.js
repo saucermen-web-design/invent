@@ -5,6 +5,8 @@
   const methodOverride = require("method-override");
   const morgan = require('morgan');
   const session = require('express-session');
+  const favicon = require('serve-favicon');
+  const path = require('path');
 
   // PROCCESS .ENV FILE
   const PORT = process.env.PORT || 3001;
@@ -23,6 +25,8 @@
     console.log("my own middleware");
     next();
   });
+  
+  app.use(favicon(path.join(__dirname,'public','images','inventIcon.png')));
 
   app.use(function(req, res, next) {
     req.date = new Date().toLocaleDateString();

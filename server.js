@@ -6,15 +6,18 @@ const methodOverride = require("method-override");
 const session = require('express-session');
 const favicon = require('serve-favicon');
 const path = require('path');
-const MongoStore = require('connect-mongo');
+const MySQLStore = require('express-mysql-session');
 require('dotenv').config()
 
-  // PROCCESS .ENV FILE
+  // PROCESS .ENV FILE
   const PORT = process.env.PORT || 3001;
-  const MONGODB_URI = process.env.MONGODB_URI;
+  const MYSQL_HOST = process.env.MYSQL_HOST;
+  const MYSQL_USER = process.env.MYSQL_USER;
+  const MYSQL_PASSWORD = process.env.MYSQL_PASSWORD;
+  const MYSQL_DATABASE = process.env.MYSQL_DATABASE;
 
-// Load up mongoose
-  const mongoose = require("mongoose");
+// Load up mySQL
+  const mysql = require('mysql2');
   app.use(express.urlencoded({ extended: true }));
 
   app.use(methodOverride("_method"));
@@ -35,25 +38,32 @@ require('dotenv').config()
     next();
   });
 
+// SESSION
   app.use(session({
     cookie:{
-        secure: true,
-        maxAge:60000
-           },
-    store: MongoStore.create({ mongoUrl: MONGODB_URI }), 
+      secure: true,
+      maxAge:60000
+    },
+    store: new MySQLStore({
+      host: 'your-hostname-or-ip-address',
+      user: 'your-username',
+      password: 'your-password',
+      database: 'your-database-name'
+    }),
     secret: 'supersecret',
     saveUninitialized: true,
     resave: false
-    }));
+  }));
 
-// Connect mongoose to mongo db:
-  mongoose.connect(MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
+// CONNECT MYSQL
+  const connection = mysql.createConnection({
+      host: 'your-hostname-or-ip-address',
+      user: 'your-username',
+      password: 'your-password',
+      database: 'your-database-name'
   });
-  mongoose.connection.once("open", () => {
-    // console.log("connected to mongo");
-  });
+    
+  connection.connect();
 
 // CONTROLLERS
   const itemsController = require("./controllers/items");
@@ -75,7 +85,7 @@ require('dotenv').config()
       res.redirect("/");
   });
 
-// HOW MANY TIMES VISITIED
+// HOW MANY TIMES VISITED
   app.get('/times-visited', function(req, res) {
     if(req.session.visits) {
         req.session.visits++;
@@ -89,3 +99,8 @@ require('dotenv').config()
   app.listen(PORT, () => {
     // console.log("listening");
   });
+
+// TODO
+
+// Replace all instances of Mongoose model methods with MySQL methods.
+// adjust your data models and queries accordingly.

@@ -2,7 +2,7 @@
 const express = require("express");
 const app = express();
 const methodOverride = require("method-override");
-// const morgan = require('morgan');
+const morgan = require('morgan');
 const session = require('express-session');
 const favicon = require('serve-favicon');
 const path = require('path');
@@ -22,11 +22,11 @@ require('dotenv').config()
 
   app.use(methodOverride("_method"));
   app.use(express.static('public'));
-  // app.use(morgan('dev'));
+  app.use(morgan('dev'));
 
 // Middleware
   app.use((req, res, next) => {
-    // console.log("my own middleware");
+    console.log("my own middleware");
     next();
   });
   
@@ -45,10 +45,10 @@ require('dotenv').config()
       maxAge:60000
     },
     store: new MySQLStore({
-      host: 'your-hostname-or-ip-address',
-      user: 'your-username',
-      password: 'your-password',
-      database: 'your-database-name'
+      host: MYSQL_HOST,
+      user: MYSQL_USER,
+      password: MYSQL_PASSWORD,
+      database: MYSQL_DATABASE,
     }),
     secret: 'supersecret',
     saveUninitialized: true,
@@ -57,10 +57,10 @@ require('dotenv').config()
 
 // CONNECT MYSQL
   const connection = mysql.createConnection({
-      host: 'your-hostname-or-ip-address',
-      user: 'your-username',
-      password: 'your-password',
-      database: 'your-database-name'
+      host: MYSQL_HOST,
+      user: MYSQL_USER,
+      password: MYSQL_PASSWORD,
+      database: MYSQL_DATABASE,
   });
     
   connection.connect();
@@ -97,10 +97,11 @@ require('dotenv').config()
 
 // Web server:
   app.listen(PORT, () => {
-    // console.log("listening");
+    console.log("listening");
   });
 
 // TODO
 
 // Replace all instances of Mongoose model methods with MySQL methods.
 // adjust your data models and queries accordingly.
+// add error handling to ensure smooth operation of the server.

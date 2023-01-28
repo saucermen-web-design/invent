@@ -1,0 +1,349 @@
+/* Container for the entire registration section */
+.regContainer {
+    width: 80%; /* adjust as needed */
+    margin: 0 auto; /* center the container on the page */
+    padding: 50px; /* add some padding for visual spacing */
+}
+
+/* Heading for the registration section */
+.regHeading {
+    text-align: center; /* center the heading */
+    margin-bottom: 50px; /* add some visual spacing below the heading */
+}
+
+/* Container for the registration form */
+.registration {
+    width: 60%; /* adjust as needed */
+    margin: 0 auto; /* center the container on the page */
+    padding: 20px; /* add some padding for visual spacing */
+    background-color: #f2f2f2; /* add a light gray background color */
+    border-radius: 10px; /* round the edges of the container */
+}
+
+/* Form inputs */
+.registration input[type="text"],
+.registration input[type="number"],
+.registration input[type="checkbox"] {
+    width: 100%; /* make the inputs full width */
+    padding: 12px 20px; /* add some padding inside the inputs */
+    margin: 8px 0; /* add some visual spacing below each input */
+    box-sizing: border-box; /* ensure the inputs take up the full width */
+    border: 1px solid #ccc; /* add a light gray border */
+    border-radius: 4px; /* round the edges of the inputs */
+}
+
+/* Form submit button */
+.registration input[type="submit"] {
+    width: 100%; /* make the button full width */
+    background-color: #4CAF50; /* add a green background color */
+    color: white; /* change the text color to white */
+    padding: 14px 20px; /* add some padding inside the button */
+    margin: 8px 0; /* add some visual spacing below the button */
+    border: none; /* remove the border */
+    border-radius: 4px; /* round the edges of the button */
+    cursor: pointer; /* change the cursor to a pointer when hovering over the button */
+}
+
+/* Change the background color of the button on hover */
+.registration input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+.itemId {
+    width: 10%;
+}
+
+.itemName {
+    width: 20%;
+}
+
+.itemType {
+    width: 15%;
+}
+
+.itemDesc {
+    width: 25%;
+}
+
+.itemCount {
+    width: 5%;
+}
+
+.forSale {
+    width: 5%;
+}
+
+.listing {
+    width: 20%;
+}
+
+#itemDltBtn {
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.bottomBar {
+    background-color: #333;
+    color: white;
+    padding: 1em;
+    text-align: center;
+}
+
+footer {
+    font-size: 0.8em;
+}
+
+body {
+    background-color: #f4f4f4;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.bottomBar {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 15px 0;
+}
+
+footer {
+    font-size: 14px;
+}
+
+.navigation {
+    background-color: #333;
+    color: #fff;
+}
+
+.navigation nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+.navigation nav p {
+    margin: 0;
+}
+
+.navigation nav img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+.navigation nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+
+.navigation nav ul li {
+    margin-left: 1rem;
+}
+
+.navigation nav ul a {
+    color: #fff;
+    text-decoration: none;
+}
+
+#logoutBtn {
+    margin-left: auto;
+}
+
+/* Container */
+.regContainer {
+    width: 50%;
+    margin: 0 auto;
+  }
+  
+  /* Heading */
+  .regHeading {
+    text-align: center;
+    margin-bottom: 2em;
+  }
+  
+  /* Form */
+  .registration {
+    border: 1px solid #ccc;
+    padding: 1em;
+  }
+  
+  /* Form elements */
+  .registration input[type='text'],
+  .registration input[type='number'] {
+    width: 100%;
+    padding: 0.5em;
+    margin-bottom: 1em;
+    border: 1px solid #ccc;
+  }
+  
+  /* Submit button */
+  .registration input[type='submit'] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 0.5em 1em;
+    border: none;
+    cursor: pointer;
+  }
+
+  .mainContainer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+.titleBar {
+    width: 100%;
+    background-color: #f1f1f1;
+    text-align: center;
+    padding: 20px;
+}
+.titleBar h1 {
+    font-size: 3em;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+.showContainer {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+}
+.showList {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+.showList li {
+    margin-bottom: 20px;
+}
+.showList h3 {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.showList p {
+    font-size: 1.2em;
+    margin-bottom: 0;
+}
+.editBtn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.regContainer {
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.regHeading {
+    margin: 20px 0;
+}
+
+.regHeading h1 {
+    font-size: 2em;
+}
+
+.registration {
+    margin: 20px 0;
+}
+
+.registration input[type='text'], .registration input[type='password'] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+}
+
+.registration input[type='submit'] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.registration input[type='submit']:hover {
+    background-color: #45a049;
+}
+
+.regContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 50px auto;
+    width: 50%;
+    border: 1px solid gray;
+    padding: 20px;
+}
+
+.regHeading {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.registration {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.registration input[type="text"],
+.registration input[type="password"] {
+    margin-bottom: 10px;
+    padding: 5px;
+    width: 80%;
+}
+
+.registration input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+    width: 40%;
+    margin-top: 10px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

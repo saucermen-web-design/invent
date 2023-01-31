@@ -1,22 +1,26 @@
+<!-- Bring in header partial -->
 <%- include('../../views/partials/header') %>    
-
+<!-- Login form container start -->
         <div class="regContainer">
             <div class="regHeading">
                 <h1>inVent Login</h1>
             </div>
+<!-- Login form -->
             <div class="registration">
                 <form name="registration-form" action="/users/login" onsubmit="return validateForm()" method="POST">
                     <input type="hidden" name="csrf_token" value="token-generated-here" />
-                    Username: <input type="text" name="username" required /><br />
-                    Password: <input type="password" name="password" required /><br />
-                    <input type="submit" value="Login" />
+                    Username: <input label="username" type="text" name="username" required /><br />
+                    Password: <input label="password" type="password" name="password" required /><br />
+                    <input label="login" type="submit" value="Login" />
                 </form>
             </div>
             <div>
+<!-- Register button -->
                 <form action="/users/new" method="GET">
-                    <input type="submit" value="Register"/>
+                    <input label="register" type="submit" value="Register"/>
                 </form>
             </div>
         </div>
-
+<!-- Login form container end -->
+<!-- Bring in footer partial -->
 <%- include('../../views/partials/footer') %>

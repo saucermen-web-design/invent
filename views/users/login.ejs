@@ -6,6 +6,7 @@
             </div>
             <div class="registration">
                 <form name="registration-form" action="/users/login" onsubmit="return validateForm()" method="POST">
+                    <input type="hidden" name="csrf_token" value="token-generated-here" />
                     Username: <input type="text" name="username" required /><br />
                     Password: <input type="password" name="password" required /><br />
                     <input type="submit" value="Login" />

@@ -5,9 +5,9 @@
                 <h1>inVent Login</h1>
             </div>
             <div class="registration">
-                <form action="/users/login" method="POST">
-                    Username: <input type="text" name="username" /><br />
-                    Password: <input type="password" name="password" /><br />
+                <form name="registration-form" action="/users/login" onsubmit="return validateForm()" method="POST">
+                    Username: <input type="text" name="username" required /><br />
+                    Password: <input type="password" name="password" required /><br />
                     <input type="submit" value="Login" />
                 </form>
             </div>

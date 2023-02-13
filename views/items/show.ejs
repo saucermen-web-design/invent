@@ -2,7 +2,7 @@
 <%- include('../../views/partials/nav') %>
   <div class="mainContainer">
     <div class='titleBar'>
-      <h1><%= item.name %></h1>
+      <h1><%= item.name ? item.name : 'Loading...' %></h1>
     </div>
     <div class="showContainer">
       <div class='showList'>

@@ -6,20 +6,21 @@
         </div>
             <div class='registration'>
                 <form action="/items/<%=item.id%>?_method=PUT" method="POST">
-    		        Name: <input type="text" name="name" value="<%=item.name%>"/><br/>
-    		        Type: <input type="text" name="type" value="<%=item.type%>"/><br/>
-                    Desc.: <input type="text" name="description" value="<%= item.description %>"/><br/>
-                    Count: <input type="number" name="count" value="<%= item.count %>"/><br/>
-                    Listing: <input type="text" name="listing" value="<%= item.listing %>"/><br/>
+    		        Name: <input label="item-name" type="text" name="name" value="<%=item.name%>"/><br/>
+    		        Type: <input label="item-type" type="text" name="type" value="<%=item.type%>"/><br/>
+                    Desc.: <input label="item-desc" type="text" name="description" value="<%= item.description %>"/><br/>
+                    Count: <input label="item-count" type="number" name="count" value="<%= item.count %>"/><br/>
+                    Listing: <input label="item-listing" type="text" name="listing" value="<%= item.listing %>"/><br/>
     		        Is for sale? :
                     <input 
+                        label="item-for-sale"
                         type="checkbox" 
-                        name="forSale"
-                            <% if(item.forSale === true){ %>
+                        name="for-sale"
+                            <% if(item.for-sale === true){ %>
                                 checked
                             <% } %>
                     /><br/>
-                    <input type="submit" name="" value="Submit Changes"/>
+                    <input label="submit-changes" type="submit" name="" value="Submit Changes"/>
                 </form>
             </div>
         </div>

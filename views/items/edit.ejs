@@ -1,16 +1,46 @@
 <%- include('../../views/partials/header') %>
-        
+
+    <%-        
+        const validateForm = (form) => {
+            <!-- FORM SAMPLE -- document.forms["item-edit-form"] -->
+           
+            if( form.name.value == "" ) {
+               alert( "Please provide an item name!" );
+               form.name.focus();
+               return false;
+            }
+            if( form.type.value == "" ) {
+               alert( "Please provide an item type!" );
+               form.type.focus();
+               return false;
+            }
+            if( form.count.value == "" || isNaN( form.count.value )) {
+               
+               alert("Please provide a numerical count for the item");
+               form.count.focus();
+               return false;
+            }
+            return( true );
+         }
+      
+    %>
+
     <div class="regContainer">
         <div class="regHeading">
             <h1>Edit <%= item.name %></h1>
         </div>
             <div class='registration'>
-                <form action="/items/<%=item.id%>?_method=PUT" method="POST">
-    		        Name: <input label="item-name" type="text" name="name" value="<%=item.name%>"/><br/>
-    		        Type: <input label="item-type" type="text" name="type" value="<%=item.type%>"/><br/>
-                    Desc.: <input label="item-desc" type="text" name="description" value="<%= item.description %>"/><br/>
-                    Count: <input label="item-count" type="number" name="count" value="<%= item.count %>"/><br/>
-                    Listing: <input label="item-listing" type="text" name="listing" value="<%= item.listing %>"/><br/>
+                <form name="item-edit-form" action="/items/<%=item.id%>?_method=PUT" onSubmit="return validateForm(document.forms['item-edit-form'])" method="POST">
+    		        Name: <input label="item-name" type="text" name="name" value="<%= item.name%>" required/>
+                    <br/>
+    		        Type: <input label="item-type" type="text" name="type" value="<%= item.type%>" required />
+                    <br/>
+                    Desc.: <input label="item-desc" type="text" name="description" value="<%= item.description %>"/>
+                    <br/>
+                    Count: <input label="item-count" type="number" name="count" value="<%= item.count %>" min="0" required />
+                    <br/>
+                    Listing: <input label="item-listing" type="text" name="listing" value="<%= item.listing %>"/>
+                    <br/>
     		        Is for sale? :
                     <input 
                         label="item-for-sale"
@@ -19,8 +49,9 @@
                             <% if(item.for-sale === true){ %>
                                 checked
                             <% } %>
-                    /><br/>
-                    <input label="submit-changes" type="submit" name="" value="Submit Changes"/>
+                    />
+                    <br/>
+                    <input label="submit-changes" type="submit" name="" value="Submit Changes" />
                 </form>
             </div>
         </div>

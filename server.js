@@ -1,37 +1,32 @@
 // REQUIRED MODULES  
-const express = require("express");
-const app = express();
-const methodOverride = require("method-override");
-const morgan = require('morgan');
-const session = require('express-session');
-const favicon = require('serve-favicon');
-const path = require('path');
-const MySQLStore = require('express-mysql-session');
-require('dotenv').config()
+  const express = require("express");
+  const app = express();
+  const methodOverride = require("method-override");
+  const morgan = require('morgan');
+  const session = require('express-session');
+  const favicon = require('serve-favicon');
+  const path = require('path');
+  const mysql = require('mysql2');
+  const MySQLStore = require('express-mysql-session');
+  require('dotenv').config()
 
-  // PROCESS .ENV FILE
+// PROCESS .ENV FILE
   const PORT = process.env.PORT || 3001;
   const MYSQL_HOST = process.env.MYSQL_HOST;
   const MYSQL_USER = process.env.MYSQL_USER;
   const MYSQL_PASSWORD = process.env.MYSQL_PASSWORD;
   const MYSQL_DATABASE = process.env.MYSQL_DATABASE;
 
-// Load up mySQL
-  const mysql = require('mysql2');
-  app.use(express.urlencoded({ extended: true }));
-
-  app.use(methodOverride("_method"));
-  app.use(express.static('public'));
-  app.use(morgan('dev'));
-
 // Middleware
   app.use((req, res, next) => {
     console.log("my own middleware");
     next();
   });
-  
+  app.use(express.urlencoded({ extended: true }));
+  app.use(methodOverride("_method"));
+  app.use(express.static('public'));
+  app.use(morgan('dev'));
   app.use(favicon(path.join(__dirname,'public','images','inventIcon.png')));
-
   app.use(function(req, res, next) {
     req.date = new Date().toLocaleDateString();
     req.time = new Date().toLocaleTimeString();
@@ -101,7 +96,4 @@ require('dotenv').config()
   });
 
 // TODO
-
-// Replace all instances of Mongoose model methods with MySQL methods.
-// adjust your data models and queries accordingly.
 // add error handling to ensure smooth operation of the server.

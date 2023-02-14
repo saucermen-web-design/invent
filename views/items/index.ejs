@@ -1,60 +1,52 @@
+<script>
+console.log(`ITEMS ARRAY ${items}`);
+</script>
 <%- include('../../views/partials/header') %>
 <%- include('../../views/partials/nav') %>
-    <div class="mainContainer">
+<div class="mainContainer">
+  <div class="titleBar">
+    <h1>Inventory</h1>
+  </div>
 
-      <div class='titleBar'>
-        <h1>Inventory</h1>
-      </div>
-
-      <div class="itemDisp">
-        <table>
-          <thead>
-            <colgroup>
-              <col span='1' class='itemId'>
-              <col span="2" class="itemName">
-              <col span="2" class="itemType">
-              <col span='3' class='itemDesc'>
-              <col span="1" class="itemCount">
-              <col span="1" class="forSale">
-              <col span="3" class="listing">
-            </colgroup>
-            <tr>
-              <th>Item ID</th>
-              <th>Item Name</th>
-              <th>Item Type</th>
-              <th>Item Description</th>
-              <th>Item Count</th>
-              <th>For sale</th>
-              <th>Listing</th>
-              <th colspan='2'></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% items.forEach(function(i) { %>
-              <tr>
-                <td><%= i._id %></td>
-                <td><%= i.name %></td>
-                <td><%= i.type %></td>
-                <td><%= i.description %></td>
-                <td><%= i.count %></td>
-                <td><%= i.forSale %> </td>
-                <td><%= i.listing %> </td>
-                <td>
-                  <a href="/items/<%= i._id %>">
-                    DETAILS
-                  </a>
-                </td>
-                <td>
-                  <form action="/items/<%= i._id %>?_method=DELETE" method="POST">
-                    <input id='itemDltBtn' type="submit" value="X" />
-                  </form>
-                </td>
-              </tr>
-            <% }); %>
-          </tbody>
-        </table>
-      </div>
-
-    </div>
+  <div class="itemDisp">
+    <table>
+      <thead>
+        <tr>
+          <th>Item ID</th>
+          <th>Item Name</th>
+          <th>Item Type</th>
+          <th>Item Description</th>
+          <th>Item Count</th>
+          <th>For Sale</th>
+          <th>Listing</th>
+          <th colspan='2'></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% items.forEach(function(item) { %>
+          <tr>
+            <td><%= item.id %></td>
+            <td><%= item.name %></td>
+            <td><%= item.type %></td>
+            <td><%= item.description %></td>
+            <td><%= item.count %></td>
+            <td><%= item.forSale %> </td>
+            <td><%= item.listing %> </td>
+            <td>
+              <a href="/items/<%= item.id %>">
+                DETAILS
+              </a>
+            </td>
+            <td>
+              <form action="/items/<%= item.id %>?_method=DELETE" method="POST">
+                <input id='itemDltBtn' type="submit" value="X" />
+              </form>
+            </td>
+          </tr>
+        <% }); %>
+      </tbody>      
+    </table>
+  </div>
+</div>
 
 <%- include('../../views/partials/footer') %>

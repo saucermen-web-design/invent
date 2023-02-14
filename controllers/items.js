@@ -10,6 +10,11 @@
   } = require("../models/item");
 
 // CREATE
+  router.get("/new", (req, res) => {
+    res.render("items/new");
+  });
+
+
   router.post("/", (req, res) => {
     if (req.body.forSale === "on") {
       //if checked, req.body.forSale is set to 'on'
@@ -25,20 +30,35 @@
   });
 
 // INDEX..aka SHOW ALL
-  router.get("/", (req, res) => {
-    getAllItems((error, items) => {
-      res.render("items/index", { items });
-    });
+router.get("/", (req, res) => {
+  getAllItems((error, items) => {
+    if (error) {
+      console.log(error);
+      items = [];
+      res.locals.items = items;
+    }
+    console.log('Rendered items:', items); // debug statement
+    res.render("items/index", { items: items });
   });
+});
+
 
 // SHOW ONE
   router.get("/:id", (req, res) => {
     getItemById(req.params.id, (err, foundItem) => {
-      res.render("items/show", {
-        item: foundItem,
-      });
+      res.locals.items = items;
+      // check if the item has a name property
+      if (foundItem && foundItem.name) {
+        res.render("items/show", {
+          item: foundItem,
+        });
+      } else {
+        console.log("No items....");
+        res.redirect("/items");
+      }
     });
   });
+
 
 // DELETE
   router.delete("/:id", (req, res) => {

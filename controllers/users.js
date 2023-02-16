@@ -58,7 +58,8 @@ router.post('/login', async (req, res) => {
 // DASHBOARD
 router.get('/dashboard', (req, res) => {
   if (req.session.userId) {
-    res.render('items/index');
+    const user = req.user;
+    res.render('dashboard', { user });
   } else {
     res.redirect('/users/login');
   }

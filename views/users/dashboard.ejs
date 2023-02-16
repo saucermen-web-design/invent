@@ -1,6 +1,18 @@
 <%- include('../../views/partials/header') %>
 
-    <h1>LOG-IN SUCCESSFUL.  CONGRATS!</h1>
+    <h1> LOG-IN SUCCESSFUL. Welcome, <%= user.username %>! </h1>
+    <p>Your account details:</p>
+    <ul>
+      <li><strong>Username:</strong> <%= user.username %></li>
+      <li><strong>Email:</strong> <%= user.email %></li>
+      <li><strong>Created:</strong> <%= user.createdAt.toDateString() %></li>
+    </ul>
+    <!-- <form action="/logout" method="post">
+      <button type="submit">Logout</button>
+    </form> -->
+  </body>
+</html>
+
 
     <a href="users/logout">LOGOUT</a>
 

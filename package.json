@@ -8,8 +8,8 @@
     "start": "node server.js",
     "dev": "nodemon server.js",
     "sass": "node-sass --output-style=expanded --source-map true --watch src/ -o dist/",
-    "build-sass": "node-sass scss/main.scss css/main.css",
-    "watch-sass": "node-sass -w scss/main.scss css/main.css"
+    "build-sass": "node-sass style.scss public/css/style.css",
+    "watch-sass": "node-sass -w style.scss public/css/style.css"
   },
   "author": "Coty McKinney",
   "license": "ISC",

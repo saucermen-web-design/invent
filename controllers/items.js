@@ -1,96 +1,89 @@
-// REQUIRED MODULES 
-  const express = require("express");
-  const router = express.Router();
-  const {
-    addItem,
-    getAllItems,
-    getItemById,
-    updateItemById,
-    deleteItemById,
-  } = require("../models/item");
+const express = require("express");
+const router = express.Router();
+const itemModel = require("../models/item");
+require('dotenv').config();
 
 // CREATE
-  router.get("/new", (req, res) => {
-    res.render("items/new");
-  });
-
-
-  router.post("/", (req, res) => {
-    if (req.body.forSale === "on") {
-      //if checked, req.body.forSale is set to 'on'
-      req.body.forSale = true;
-    } else {
-      //if not checked, req.body.forSale is undefined
-      req.body.forSale = false;
-    }
-
-    addItem(req.body, (error, result) => {
-      res.redirect("/items");
-    });
-  });
-
-// INDEX..aka SHOW ALL
-router.get("/", (req, res) => {
-  getAllItems((error, items) => {
-    if (error) {
-      console.log(error);
-      items = [];
-      res.locals.items = items;
-    }
-    console.log('Rendered items:', items); // debug statement
-    res.render("items/index", { items: items });
-  });
+router.get("/new", (req, res) => {
+  res.render("items/new");
 });
 
+router.post("/", async (req, res) => {
+  req.body.forSale = req.body.forSale === "on";
+  try {
+    const result = await itemModel.addItem(req.body);
+    res.redirect("/items");
+  } catch (error) {
+    console.log(error);
+    res.status(500).send('Error adding item');
+  }
+});
+
+// INDEX..aka SHOW ALL
+router.get("/", async (req, res) => {
+  try {
+    const items = await itemModel.getAllItems();
+    res.render("items/index", { items });
+    console.log('Rendered items:', items); // debug statement
+  } catch (error) {
+    console.log(error);
+    res.status(500).send('Error getting items');
+  }
+});
 
 // SHOW ONE
-  router.get("/:id", (req, res) => {
-    getItemById(req.params.id, (err, foundItem) => {
-      res.locals.items = items;
-      // check if the item has a name property
-      if (foundItem && foundItem.name) {
-        res.render("items/show", {
-          item: foundItem,
-        });
-      } else {
-        console.log("No items....");
-        res.redirect("/items");
-      }
+router.get("/:id", async (req, res) => {
+  try {
+    const foundItem = await itemModel.getItemById(req.params.id);
+    if (!foundItem) {
+      return res.status(404).send('Item not found');
+    }
+    res.render("items/show", {
+      item: foundItem,
     });
-  });
-
+  } catch (error) {
+    console.log(error);
+    res.status(500).send('Error getting item');
+  }
+});
 
 // DELETE
-  router.delete("/:id", (req, res) => {
-    deleteItemById(req.params.id, (err, data) => {
-      res.redirect("/items");
-    });
-  });
+router.delete("/:id", async (req, res) => {
+  try {
+    const data = await itemModel.deleteItemById(req.params.id);
+    res.redirect("/items");
+  } catch (error) {
+    console.log(error);
+    res.status(500).send('Error deleting item');
+  }
+});
 
 // EDIT
-  router.get("/:id/edit", (req, res) => {
-    getItemById(req.params.id, (err, foundItem) => {
-      res.render("items/edit", {
-        item: foundItem,
-      });
+router.get("/:id/edit", async (req, res) => {
+  try {
+    const foundItem = await itemModel.getItemById(req.params.id);
+    if (!foundItem) {
+      return res.status(404).send('Item not found');
+    }
+    res.render("items/edit", {
+      item: foundItem,
     });
-  });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send('Error getting item');
+  }
+});
 
 // PUT/UPDATE
-  router.put("/:id", (req, res) => {
-    if (req.body.forSale === "on") {
-      req.body.forSale = true;
-    } else {
-      req.body.forSale = false;
-    }
+router.put("/:id", async (req, res) => {
+  req.body.forSale = req.body.forSale === "on";
+  try {
+    const updateModel = await itemModel.updateItemById(req.params.id, req.body);
+    res.redirect("/items");
+  } catch (error) {
+    console.log(error);
+    res.status(500).send('Error updating item');
+  }
+});
 
-    updateItemById(req.params.id, req.body, (err, updateModel) => {
-      if (err) {
-      } else {
-        res.redirect("/items");
-      }
-    });
-  });
-
-// EXPORT
-  module.exports = router;
+module.exports = router;

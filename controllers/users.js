@@ -11,7 +11,7 @@ router.get('/new', (req, res) => {
 });
 
 // CREATE NEW USER
-router.post('/signup', async (req, res) => {
+router.post('/users/signup', async (req, res) => {
   const { username, password, email } = req.body;
 
   try {
@@ -58,7 +58,7 @@ router.post('/login', async (req, res) => {
 // DASHBOARD
 router.get('/dashboard', (req, res) => {
   if (req.session.userId) {
-    const user = req.user;
+    const user = req.session.userId;
     res.render('dashboard', { user });
   } else {
     res.redirect('/users/login');

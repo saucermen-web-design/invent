@@ -17,23 +17,21 @@
   const MYSQL_PASSWORD = process.env.MYSQL_PASSWORD;
   const MYSQL_DATABASE = process.env.MYSQL_DATABASE;
 
-// Middleware
-  app.use((req, res, next) => {
-    console.log("my own middleware");
-    next();
+// CONNECT MYSQL
+  const connection = mysql.createConnection({
+    host: MYSQL_HOST,
+    user: MYSQL_USER,
+    password: MYSQL_PASSWORD,
+    database: MYSQL_DATABASE,
   });
+
+// Middleware
   app.use(express.urlencoded({ extended: true }));
   app.use(methodOverride("_method"));
   app.use(express.static('public'));
   app.use(morgan('dev'));
   app.use(favicon(path.join(__dirname,'public','images','inventIcon.png')));
-  app.use(function(req, res, next) {
-    req.date = new Date().toLocaleDateString();
-    req.time = new Date().toLocaleTimeString();
-    next();
-  });
-
-// SESSION
+  // SESSION
   app.use(session({
     cookie:{
       secure: true,
@@ -49,16 +47,35 @@
     saveUninitialized: true,
     resave: false
   }));
+  // // middleware to check for valid session
+  // const requireSession = (req, res, next) => {
+  //   if (!req.session || !req.session.user) {
+  //     // redirect to login page if session not found
+  //     res.redirect('/users/login');
+  //   } else {
+  //     // session found, proceed to route handlers
+  //     next();
+  //   }
+  // };
+  // // apply middleware to all routes except login and signup
+  // app.use(/^\/(?!users\/(login|signup)).*/, requireSession);
 
-// CONNECT MYSQL
-  const connection = mysql.createConnection({
-      host: MYSQL_HOST,
-      user: MYSQL_USER,
-      password: MYSQL_PASSWORD,
-      database: MYSQL_DATABASE,
+  app.use(function(req, res, next) {
+    req.date = new Date().toLocaleDateString();
+    req.time = new Date().toLocaleTimeString();
+    next();
   });
-    
-  connection.connect();
+  // // ERROR HANDLING
+  // app.use(function(req, res, next) {
+  //   res.status(404).send("Sorry, the page you requested does not exist.");
+  // });
+  // app.use(function (err, req, res, next) {
+  //   console.error(err.stack);
+  //   res.status(500).send('Something broke!');
+  // });
+
+// SET VIEW ENGINE 
+  app.set('view engine', 'ejs');
 
 // CONTROLLERS
   const itemsController = require("./controllers/items");
@@ -67,8 +84,6 @@
   const usersController = require("./controllers/users");
   app.use("/users", usersController);
 
-// SET VIEW ENGINE 
-  app.set('view engine', 'ejs');
 
 // ROUTING
   app.get("/", (req, res) => {
@@ -76,24 +91,24 @@
   });
 
 // wildcard route
-  app.get("*", (req, res) => {
-      res.redirect("/");
-  });
+  // app.get("*", (req, res) => {
+  //     res.redirect("/");
+  // });
 
-// HOW MANY TIMES VISITED
-  app.get('/times-visited', function(req, res) {
-    if(req.session.visits) {
-        req.session.visits++;
-    } else {
-        req.session.visits = 1;
-    };
-    res.send(`<h1>You've visited this page ${req.session.visits} time(s) </h1>`);
-});
+// // HOW MANY TIMES VISITED
+//   app.get('/times-visited', function(req, res) {
+//     if(req.session.visits) {
+//         req.session.visits++;
+//     } else {
+//         req.session.visits = 1;
+//     };
+//     res.send(`<h1>You've visited this page ${req.session.visits} time(s) </h1>`);
+// });
 
 // Web server:
   app.listen(PORT, () => {
-    console.log("listening");
+    console.log(`listening on port ${PORT}`);
   });
 
-// TODO
-// add error handling to ensure smooth operation of the server.
+  // console.log(process.cwd());
+  

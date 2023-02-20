@@ -1,46 +1,33 @@
-// REQUIRED MODULES
-  const { urlencoded } = require("express");
-  const mysql = require("mysql2");
-  require('mysql2/promise');
-  const dotenv = require('dotenv');
+const mysql = require("mysql2/promise");
+const dotenv = require('dotenv');
 
+dotenv.config();
 
-// PROCESS .ENV FILE
-  dotenv.config();
-  const MYSQL_HOST = process.env.MYSQL_HOST;
-  const MYSQL_USER = process.env.MYSQL_USER;
-  const MYSQL_PASSWORD = process.env.MYSQL_PASSWORD;
-  const MYSQL_DATABASE = process.env.MYSQL_DATABASE;
+const pool = mysql.createPool({
+  host: process.env.MYSQL_HOST,
+  user: process.env.MYSQL_USER,
+  password: process.env.MYSQL_PASSWORD,
+  database: process.env.MYSQL_DATABASE,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0,
+});
 
-// CREATE AND TEST CONNECTION
-  const connection = mysql.createConnection({
-    host: MYSQL_HOST,
-    user: MYSQL_USER,
-    password: MYSQL_PASSWORD,
-    database: MYSQL_DATABASE,
-    connectTimeout: 20000, // set connection timeout to 20 seconds
-  });
+const ITEM_TABLE = 'items';
 
-  connection.connect((err) => {
-    if (err) throw err;
-    // console.log("Connected to MySQL!");
-  });
+const itemSchema = {
+  id: 'INT(11) NOT NULL AUTO_INCREMENT',
+  type: 'VARCHAR(255) NOT NULL',
+  name: 'VARCHAR(255) NOT NULL',
+  description: 'TEXT',
+  itemCondition: 'INT',
+  count: 'INT NOT NULL',
+  forSale: 'BOOLEAN NOT NULL',
+  listing: 'TEXT',
+  dateAdded: 'DATETIME NOT NULL',
+};
 
-// DEFINE SCHEMA
-  const itemSchema = {
-    id: 'INT(11) NOT NULL AUTO_INCREMENT',
-    type: 'VARCHAR(255) NOT NULL',
-    name: 'VARCHAR(255) NOT NULL',
-    description: 'TEXT',
-    itemCondition: 'INT',
-    count: 'INT NOT NULL',
-    forSale: 'BOOLEAN NOT NULL',
-    listing: 'TEXT',
-    dateAdded: 'DATETIME NOT NULL',
-  };
-
-// CREATE ITEMS TABLE IF NEEDED
-const createItemsTable = `CREATE TABLE IF NOT EXISTS items (
+const createItemsTable = `CREATE TABLE IF NOT EXISTS ${ITEM_TABLE} (
   id INT(11) NOT NULL AUTO_INCREMENT,
   type VARCHAR(255) NOT NULL,
   name VARCHAR(255) NOT NULL,
@@ -53,70 +40,47 @@ const createItemsTable = `CREATE TABLE IF NOT EXISTS items (
   PRIMARY KEY (id)
 )`;
 
-  connection.query(createItemsTable, (err, results) => {
-    if (err) throw err;
-    // console.log("Created items table!");
-  });
-  // conn.release();
+const addItem = async (item) => {
+  const { type, name, description, count, forSale, listing, dateAdded } = item;
+  const sql = `INSERT INTO ${ITEM_TABLE} (type, name, description, count, forSale, listing, dateAdded) VALUES (?, ?, ?, ?, ?, ?, ?)`;
+  const values = [type, name, description, count, forSale, listing, dateAdded];
+  const [result] = await pool.execute(sql, values);
+  return result.insertId;
+};
 
-// ADD ITEM
-  const addItem = (item, cb) => {
-    const { type, name, description, itemCondition, count, forSale, listing, dateAdded } = item;
-    const sql = `INSERT INTO items (type, name, description, itemCondition, count, forSale, listing, dateAdded) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
-    connection.query(sql, [type, name, description, itemCondition, count, forSale, listing, dateAdded], (err, result) => {
-      if (err) throw err;
-      cb(result);
-    });
-    // conn.release();
-  };
+const getAllItems = async () => {
+  const sql = `SELECT * FROM ${ITEM_TABLE}`;
+  const [rows] = await pool.execute(sql);
+  return rows;
+};
 
-// FETCH ALL ITEMS
-const getAllItems = (cb) => {
-  const sql = `SELECT * FROM items`;
-  connection.query(sql, (err, results) => {
-    if (err) throw err;
-    console.log('Fetched items:', results); // debug statement
-    cb(results);
-  });
+const getItemById = async (id) => {
+  const sql = `SELECT * FROM ${ITEM_TABLE} WHERE id = ?`;
+  const [rows] = await pool.execute(sql, [id]);
+  return rows[0];
+};
+
+const updateItemById = async (id, updates) => {
+  const columns = Object.keys(updates);
+  const values = Object.values(updates);
+  const placeholders = columns.map(() => '?').join(', ');
+  const sql = `UPDATE ${ITEM_TABLE} SET ${columns.map(c => `${c} = ?`).join(', ')} WHERE id = ?`;
+  const [result] = await pool.execute(sql, [...values, id]);
+  return result;
 };
 
 
-// FETCH ITEM
-  const getItemById = (id, cb) => {
-    const sql = `SELECT * FROM items WHERE id = ?`;
-    connection.query(sql, [id], (err, result) => {
-      if (err) throw err;
-      cb(result);
-    });
-    // conn.release();
-  };
+const deleteItemById = async (id) => {
+  const sql = `DELETE FROM ${ITEM_TABLE} WHERE id = ?`;
+  const [result] = await pool.execute(sql, [id]);
+  return result;
+};
 
-// UPDATE ITEM
-  const updateItemById = (id, updates, cb) => {
-    const sql = `UPDATE items SET ? WHERE id = ?`;
-    connection.query(sql, [updates, id], (err, result) => {
-      if (err) throw err;
-      cb(result);
-    });
-    // conn.release();
-  };
-
-// DELETE ITEM 
-  const deleteItemById = (id, cb) => {
-    const sql = `DELETE FROM items WHERE id = ?`;
-    connection.query(sql, [id], (err, result) => {
-      if (err) throw err;
-      cb(result);
-    });
-    // conn.release();
-  };
-
-// EXPORT
-  module.exports = {
-    itemSchema,
-    addItem,
-    getAllItems,
-    getItemById,
-    updateItemById,
-    deleteItemById,
-  };
+module.exports = {
+  itemSchema,
+  addItem,
+  getAllItems,
+  getItemById,
+  updateItemById,
+  deleteItemById,
+};

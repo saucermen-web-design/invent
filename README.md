@@ -4,20 +4,20 @@ inVent empowers small private sellers by helping them manage their inventory lik
 
 ## Technologies/Dependencies
 
-* JS/jQuery
-* HTML
-* CSS
-* mySQL
-* NodeJS
-* Express
-* Morgan (development logging)
-* Nodemon
+* jQuery
+* bcrypt
 * dotenv
 * ejs
-* method-override
-* mySQL
-* bcrypt
+* express-mysql-session
+* express-rate-limit
 * express-session
+* express
+* method-override
+* morgan
+* mysql2
+* node-sass
+* nodemon
+* npm
 * path
 * serve-favicon
 

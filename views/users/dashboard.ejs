@@ -1,19 +1,20 @@
 <%- include('../../views/partials/header') %>
 
-    <h1> LOG-IN SUCCESSFUL. Welcome, <%= user.username %>! </h1>
-    <p>Your account details:</p>
-    <ul>
-      <li><strong>Username:</strong> <%= user.username %></li>
-      <li><strong>Email:</strong> <%= user.email %></li>
-      <li><strong>Created:</strong> <%= user.createdAt.toDateString() %></li>
-    </ul>
-    <!-- <form action="/logout" method="post">
-      <button type="submit">Logout</button>
-    </form> -->
-  </body>
-</html>
-
-
-    <a href="users/logout">LOGOUT</a>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <h1 class="text-center">Welcome, <%= user.username %>!</h1>
+      <p class="text-center">Your account details:</p>
+      <ul>
+        <li><strong>Username:</strong> <%= user.username %></li>
+        <li><strong>Email:</strong> <%= user.email %></li>
+        <li><strong>Created:</strong> <%= user.createdAt.toDateString() %></li>
+      </ul>
+      <div class="text-center mt-3">
+        <a href="/users/logout" class="btn btn-primary">Logout</a>
+      </div>
+    </div>
+  </div>
+</div>
 
 <%- include('../../views/partials/footer') %>

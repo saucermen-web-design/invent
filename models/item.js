@@ -69,7 +69,6 @@ const updateItemById = async (id, updates) => {
   return result;
 };
 
-
 const deleteItemById = async (id) => {
   const sql = `DELETE FROM ${ITEM_TABLE} WHERE id = ?`;
   const [result] = await pool.execute(sql, [id]);

@@ -1,55 +1,30 @@
-<!-- BRING IN HEADER PARTIAL -->
-    <%- include('../../views/partials/header') %>    
-
-<!-- FORM VALIDATION -->
-    <%        
-        const validateForm = (form) => {
-            <!-- FORM SAMPLE -- document.forms["item-edit-form"] -->
-           
-            if( form.name.value == "" ) {
-               alert( "Please provide an item name!" );
-               form.name.focus();
-               return false;
-            }
-            if( form.type.value == "" ) {
-               alert( "Please provide an item type!" );
-               form.type.focus();
-               return false;
-            }
-            if( form.count.value == "" || isNaN( form.count.value )) {
-               
-               alert("Please provide a numerical count for the item");
-               form.count.focus();
-               return false;
-            }
-            return( true );
-         }
-      
-    %>
+<%- include('../../views/partials/header') %>
 
 <!-- START LOGIN FORM CONTAINER -->
-    <div class="regContainer">
-        <div class="regHeading">
-            <h1>inVent Login</h1>
-        </div>
-<!-- LOGIN FORM -->
-        <div class="registration">
-            <form name="registration-form" action="/users/login" method="POST">
-            <!-- <form name="registration-form" action="/users/login" onsubmit="return validateForm()" method="POST"> -->
-                <input type="hidden" name="csrf_token" value="token-generated-here" />
-                Username: <input label="username" type="text" name="username" required /><br />
-                Password: <input label="password" type="password" name="password" required /><br />
-                <input label="login" type="submit" value="Login" />
-            </form>
-        </div>
-        <div>
-<!-- REGISTER BUTTON -->
-            <form action="/users/new" method="GET">
-                <input label="register" type="submit" value="Register"/>
-            </form>
-        </div>
-    </div>
+<div class="regContainer">
+  <div class="regHeading">
+    <h1>inVent Login</h1>
+  </div>
+  <div class="registration">
+    <form name="registration-form" action="/users/login" method="POST">
+      <input type="hidden" name="csrf_token" value="token-here" />
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" class="form-control" id="username" name="username" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" class="form-control" id="password" name="password" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+  </div>
+  <div>
+    <form action="/users/new" method="GET">
+      <button type="submit" class="btn btn-link">Register</button>
+    </form>
+  </div>
+</div>
 <!-- END LOGIN FORM CONTAINER -->
 
-<!-- BRING IN FOOTER PARTIAL -->
-    <%- include('../../views/partials/footer') %>
+<%- include('../../views/partials/footer') %>

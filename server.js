@@ -47,7 +47,6 @@
     saveUninitialized: true,
     resave: false
   }));
-  // // middleware to check for valid session
   // const requireSession = (req, res, next) => {
   //   if (!req.session || !req.session.user) {
   //     // redirect to login page if session not found
@@ -57,8 +56,9 @@
   //     next();
   //   }
   // };
-  // // apply middleware to all routes except login and signup
+  
   // app.use(/^\/(?!users\/(login|signup)).*/, requireSession);
+  
 
   app.use(function(req, res, next) {
     req.date = new Date().toLocaleDateString();

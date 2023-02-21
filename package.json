@@ -15,18 +15,18 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
-    "connect-mongo": "^4.4.1",
     "dotenv": "^16.0.3",
     "ejs": "^3.0.1",
     "express": "^4.17.1",
     "express-mysql-session": "^2.1.8",
+    "express-rate-limit": "^6.7.0",
     "express-session": "^1.17.1",
     "method-override": "^3.0.0",
-    "mongoose": "^6.9.2",
     "morgan": "^1.10.0",
     "mysql2": "^3.1.2",
     "node-sass": "^8.0.0",
     "nodemon": "^2.0.20",
+    "npm": "^9.5.0",
     "path": "^0.12.7",
     "serve-favicon": "^2.5.0"
   }

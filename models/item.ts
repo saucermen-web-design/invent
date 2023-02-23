@@ -1,5 +1,5 @@
-const mysql = require("mysql2/promise");
-const dotenv = require('dotenv');
+import * as  mysql from 'mysql2';
+import * as dotenv from 'dotenv';
 
 dotenv.config();
 
@@ -40,43 +40,44 @@ const createItemsTable = `CREATE TABLE IF NOT EXISTS ${ITEM_TABLE} (
   PRIMARY KEY (id)
 )`;
 
-const addItem = async (item) => {
+const addItem = async (item: any) => {
   const { type, name, description, count, forSale, listing, dateAdded } = item;
   const sql = `INSERT INTO ${ITEM_TABLE} (type, name, description, count, forSale, listing, dateAdded) VALUES (?, ?, ?, ?, ?, ?, ?)`;
   const values = [type, name, description, count, forSale, listing, dateAdded];
-  const [result] = await pool.execute(sql, values);
+  const [result] = await pool.promise().execute(sql, values);
   return result.insertId;
 };
 
 const getAllItems = async () => {
   const sql = `SELECT * FROM ${ITEM_TABLE}`;
-  const [rows] = await pool.execute(sql);
+  const [rows] = await pool.promise().execute(sql);
   return rows;
 };
 
-const getItemById = async (id) => {
+const getItemById = async (id: number) => {
   const sql = `SELECT * FROM ${ITEM_TABLE} WHERE id = ?`;
-  const [rows] = await pool.execute(sql, [id]);
+  const [rows] = await pool.promise().execute(sql, [id]);
   return rows[0];
 };
 
-const updateItemById = async (id, updates) => {
+const updateItemById = async (id: number, updates: any) => {
   const columns = Object.keys(updates);
   const values = Object.values(updates);
   const placeholders = columns.map(() => '?').join(', ');
   const sql = `UPDATE ${ITEM_TABLE} SET ${columns.map(c => `${c} = ?`).join(', ')} WHERE id = ?`;
-  const [result] = await pool.execute(sql, [...values, id]);
+  const [result] = await pool.promise().execute(sql, [...values, id]);
   return result;
 };
 
-const deleteItemById = async (id) => {
+const deleteItemById = async (id: number) => {
   const sql = `DELETE FROM ${ITEM_TABLE} WHERE id = ?`;
-  const [result] = await pool.execute(sql, [id]);
+  const [result] = await pool.promise().execute(sql, [id]);
   return result;
 };
 
-module.exports = {
+export {
   itemSchema,
+  createItemsTable,
   addItem,
   getAllItems,
   getItemById,

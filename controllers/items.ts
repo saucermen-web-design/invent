@@ -1,18 +1,20 @@
-const express = require("express");
-const router = express.Router();
-const itemModel = require("../models/item");
-require('dotenv').config();
+import { Request, Response, Router } from 'express';
+import * as itemModel from '../models/item';
+import * as dotenv from 'dotenv';
+dotenv.config();
+
+const router: Router = Router();
 
 // CREATE
-router.get("/new", (req, res) => {
-  res.render("items/new");
+router.get('/new', (req: Request, res: Response) => {
+  res.render('items/new');
 });
 
-router.post("/", async (req, res) => {
-  req.body.forSale = req.body.forSale === "on";
+router.post('/', async (req: Request, res: Response) => {
+  req.body.forSale = req.body.forSale === 'on';
   try {
     const result = await itemModel.addItem(req.body);
-    res.redirect("/items");
+    res.redirect('/items');
   } catch (error) {
     console.log(error);
     res.status(500).send('Error adding item');
@@ -20,10 +22,10 @@ router.post("/", async (req, res) => {
 });
 
 // INDEX..aka SHOW ALL
-router.get("/", async (req, res) => {
+router.get('/', async (req: Request, res: Response) => {
   try {
     const items = await itemModel.getAllItems();
-    res.render("items/index", { items });
+    res.render('items/index', { items });
     console.log('Rendered items:', items); // debug statement
   } catch (error) {
     console.log(error);
@@ -32,13 +34,13 @@ router.get("/", async (req, res) => {
 });
 
 // SHOW ONE
-router.get("/:id", async (req, res) => {
+router.get('/:id', async (req: Request, res: Response) => {
   try {
     const foundItem = await itemModel.getItemById(req.params.id);
     if (!foundItem) {
       return res.status(404).send('Item not found');
     }
-    res.render("items/show", {
+    res.render('items/show', {
       item: foundItem,
     });
   } catch (error) {
@@ -48,10 +50,10 @@ router.get("/:id", async (req, res) => {
 });
 
 // DELETE
-router.delete("/:id", async (req, res) => {
+router.delete('/:id', async (req: Request, res: Response) => {
   try {
     const data = await itemModel.deleteItemById(req.params.id);
-    res.redirect("/items");
+    res.redirect('/items');
   } catch (error) {
     console.log(error);
     res.status(500).send('Error deleting item');
@@ -59,13 +61,13 @@ router.delete("/:id", async (req, res) => {
 });
 
 // EDIT
-router.get("/:id/edit", async (req, res) => {
+router.get('/:id/edit', async (req: Request, res: Response) => {
   try {
     const foundItem = await itemModel.getItemById(req.params.id);
     if (!foundItem) {
       return res.status(404).send('Item not found');
     }
-    res.render("items/edit", {
+    res.render('items/edit', {
       item: foundItem,
     });
   } catch (error) {
@@ -75,15 +77,15 @@ router.get("/:id/edit", async (req, res) => {
 });
 
 // PUT/UPDATE
-router.put("/:id", async (req, res) => {
-  req.body.forSale = req.body.forSale === "on";
+router.put('/:id', async (req: Request, res: Response) => {
+  req.body.forSale = req.body.forSale === 'on';
   try {
     const updateModel = await itemModel.updateItemById(req.params.id, req.body);
-    res.redirect("/items");
+    res.redirect('/items');
   } catch (error) {
     console.log(error);
     res.status(500).send('Error updating item');
   }
 });
 
-module.exports = router;
+export default router;

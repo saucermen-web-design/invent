@@ -5,13 +5,14 @@ inVent empowers small private sellers by helping them manage their inventory lik
 ## Technologies/Dependencies
 
 * jQuery
+* @types/mysql2
 * bcrypt
 * dotenv
 * ejs
+* express
 * express-mysql-session
 * express-rate-limit
 * express-session
-* express
 * method-override
 * morgan
 * mysql2
@@ -20,6 +21,8 @@ inVent empowers small private sellers by helping them manage their inventory lik
 * npm
 * path
 * serve-favicon
+* typescript
+* @types/node
 
 ## Getting Started
 

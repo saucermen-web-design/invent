@@ -17,7 +17,7 @@
     "@types/mysql2": "github:types/mysql2",
     "bcrypt": "^5.0.1",
     "dotenv": "^16.0.3",
-    "ejs": "^3.0.1",
+    "ejs": "^3.1.9",
     "express": "^4.17.1",
     "express-mysql-session": "^2.1.8",
     "express-rate-limit": "^6.7.0",

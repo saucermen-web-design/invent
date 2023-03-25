@@ -1,8 +1,8 @@
-const express = require('express');
-const bcrypt = require('bcrypt');
-const router = express.Router();
-const { createUser, pool } = require('../models/user');
-const rateLimit = require("express-rate-limit");
+import { Request, Response, Router } from 'express';
+import bcrypt from 'bcrypt';
+import { createUser, pool } from '../models/user';
+import rateLimit from 'express-rate-limit';
+import { RowDataPacket, OkPacket } from 'mysql2';
 
 const SALT_ROUNDS = 10;
 
@@ -13,12 +13,13 @@ const limiter = rateLimit({
   message: "Too many login attempts, please wait a minute and try again",
 });
 
+const router: Router = Router();
 
-router.get('/new', (req, res) => {
+router.get('/new', (req: Request, res: Response) => {
   res.render('users/new');
 });
 
-router.post('/users/signup', async (req, res) => {
+router.post('/users/signup', async (req: Request, res: Response) => {
   const { username, password, email } = req.body;
   try {
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
@@ -30,18 +31,16 @@ router.post('/users/signup', async (req, res) => {
   }
 });
 
-router.get('/login', (req, res) => {
+router.get('/login', (req: Request, res: Response) => {
   res.render('users/login');
 });
 
-router.post('/login', limiter, async (req, res) => {
+router.post('/login', limiter, async (req: Request, res: Response) => {
   const { username, password } = req.body;
   try {
     const [rows] = await pool.execute('SELECT * FROM users WHERE username = ? LIMIT 1', [username]);
-    if (rows.length === 0) {
-      res.redirect('/users/login');
-    } else {
-      const { id, username, password: hashedPassword, email } = rows[0];
+    if (Array.isArray(rows) && rows.length > 0) {
+      const { id, username, password: hashedPassword, email } = rows[0] as RowDataPacket;
       const doesPasswordMatch = await bcrypt.compare(password, hashedPassword);
       if (doesPasswordMatch) {
         req.session.userId = id;
@@ -49,6 +48,8 @@ router.post('/login', limiter, async (req, res) => {
       } else {
         res.redirect('/users/login');
       }
+    } else {
+      res.redirect('/users/login');
     }
   } catch (error) {
     console.error(error);
@@ -56,7 +57,7 @@ router.post('/login', limiter, async (req, res) => {
   }
 });
 
-router.get('/dashboard', (req, res) => {
+router.get('/dashboard', (req: Request, res: Response) => {
   if (req.session.userId) {
     const user = req.session.userId;
     res.render('users/dashboard', { user });
@@ -65,9 +66,9 @@ router.get('/dashboard', (req, res) => {
   }
 });
 
-router.get('/logout', (req, res) => {
+router.get('/logout', (req: Request, res: Response) => {
   req.session.destroy();
   res.redirect('/');
 });
 
-module.exports = router;
+export default router;

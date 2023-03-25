@@ -54,5 +54,25 @@
         "Wireframes",
         "YAAK",
         "YAAY"
-    ]
+    ],
+    "workbench.colorCustomizations": {
+        "activityBar.activeBackground": "#cfaea8",
+        "activityBar.background": "#cfaea8",
+        "activityBar.foreground": "#15202b",
+        "activityBar.inactiveForeground": "#15202b99",
+        "activityBarBadge.background": "#447b4d",
+        "activityBarBadge.foreground": "#e7e7e7",
+        "commandCenter.border": "#15202b99",
+        "sash.hoverBorder": "#cfaea8",
+        "statusBar.background": "#bd9087",
+        "statusBar.foreground": "#15202b",
+        "statusBarItem.hoverBackground": "#ab7266",
+        "statusBarItem.remoteBackground": "#bd9087",
+        "statusBarItem.remoteForeground": "#15202b",
+        "titleBar.activeBackground": "#bd9087",
+        "titleBar.activeForeground": "#15202b",
+        "titleBar.inactiveBackground": "#bd908799",
+        "titleBar.inactiveForeground": "#15202b99"
+    },
+    "peacock.remoteColor": "#bd9087"
 }

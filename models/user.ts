@@ -1,5 +1,5 @@
-const dotenv = require('dotenv');
-const mysql = require('mysql2/promise');
+import * as dotenv from 'dotenv';
+import * as mysql from 'mysql2/promise';
 
 dotenv.config();
 
@@ -13,26 +13,32 @@ const pool = mysql.createPool({
   queueLimit: 0,
 });
 
-async function createUsersTable() {
+async function createUsersTable(): Promise<void> {
   const conn = await pool.getConnection();
-  await conn.query(`CREATE TABLE IF NOT EXISTS users (
-    id INT NOT NULL AUTO_INCREMENT,
-    username VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    createdAt DATETIME,
-    updatedAt DATETIME,
-    PRIMARY KEY (id)
-  )`);
-  conn.release();
+  try {
+    await conn.query(`CREATE TABLE IF NOT EXISTS users (
+      id INT NOT NULL AUTO_INCREMENT,
+      username VARCHAR(255) NOT NULL,
+      password VARCHAR(255) NOT NULL,
+      email VARCHAR(255) NOT NULL,
+      createdAt DATETIME,
+      updatedAt DATETIME,
+      PRIMARY KEY (id)
+    )`);
+  } finally {
+    conn.release();
+  }
 }
 
 createUsersTable();
 
-async function createUser(username, password, email) {
+async function createUser(username: string, password: string, email: string): Promise<void> {
   const conn = await pool.getConnection();
-  await conn.query('INSERT INTO users (username, password, email, createdAt, updatedAt) VALUES (?, ?, ?, NOW(), NOW())', [username, password, email]);
-  conn.release();
+  try {
+    await conn.query('INSERT INTO users (username, password, email, createdAt, updatedAt) VALUES (?, ?, ?, NOW(), NOW())', [username, password, email]);
+  } finally {
+    conn.release();
+  }
 }
 
-module.exports = { createUser, pool };
+export { createUser, pool };
